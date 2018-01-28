@@ -118,12 +118,15 @@ public class ChargePoint implements ChargePointService {
 
 	public UnlockConnectorResponse unlockConnector(UnlockConnectorRequest parameters) {
 		logger.info("unlockConnector");
-		return new UnlockConnectorResponse();
+		UnlockConnectorResponse ucr = new UnlockConnectorResponse();
+		ucr.setStatus(UnlockStatus.NOT_SUPPORTED);
+		return ucr;
 	}
 
 	public UpdateFirmwareResponse updateFirmware(UpdateFirmwareRequest parameters) {
 		logger.info("updateFirmware");
-		return new UpdateFirmwareResponse();
+		UpdateFirmwareResponse rfr = new UpdateFirmwareResponse();
+		return rfr;
 	}
 
 }
