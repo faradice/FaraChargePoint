@@ -12,22 +12,35 @@ public class ChargePoint implements ChargePointService {
 	
 	public CancelReservationResponse cancelReservation(CancelReservationRequest parameters) {
 		logger.info("Cancel Reservation");
-		return new CancelReservationResponse();
+		int reservationId = parameters.getReservationId();
+		CancelReservationResponse crr = new CancelReservationResponse();
+		CancelReservationStatus status = CancelReservationStatus.ACCEPTED;
+		crr.setStatus(status);
+		return crr;
 	}
 
 	public ChangeAvailabilityResponse changeAvailability(ChangeAvailabilityRequest parameters) {
 		logger.info("changeAvailability");
-		return new ChangeAvailabilityResponse();
+		int connectorId = parameters.getConnectorId();
+		ChangeAvailabilityResponse car = new ChangeAvailabilityResponse();
+		AvailabilityStatus avs = AvailabilityStatus.ACCEPTED;
+		car.setStatus(avs);
+		return car;
 	}
 
 	public ChangeConfigurationResponse changeConfiguration(ChangeConfigurationRequest parameters) {
 		logger.info("changeConfiguration");
+		String key = parameters.getKey();
+		String newValue = parameters.getValue();
 		return new ChangeConfigurationResponse();
 	}
 
 	public ClearCacheResponse clearCache(ClearCacheRequest parameters) {
 		logger.info("clearCache");
-		return new ClearCacheResponse();
+		ClearCacheResponse ccr = new ClearCacheResponse();
+		ClearCacheStatus ccs = ClearCacheStatus.ACCEPTED;
+		ccr.setStatus(ccs);
+		return ccr;
 	}
 
 	public ClearChargingProfileResponse clearChargingProfile(ClearChargingProfileRequest parameters) {
