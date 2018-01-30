@@ -1,8 +1,10 @@
 package com.faradice.ocpp.chargepoint;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javax.jws.WebService;
+import javax.xml.bind.annotation.XmlSchemaType;
 
 import ocpp.cp._2015._10.*;
 
@@ -45,10 +47,22 @@ public class ChargePoint implements ChargePointService {
 
 	public ClearChargingProfileResponse clearChargingProfile(ClearChargingProfileRequest parameters) {
 		logger.info("clearChargingProfile");
-		return new ClearChargingProfileResponse();
+	    int id = parameters.getId();
+	    int connectorId = parameters.getConnectorId();
+	    ChargingProfilePurposeType purpose = parameters.getChargingProfilePurpose();
+	    int stackLevel = parameters.getStackLevel();
+	    ClearChargingProfileResponse response = new ClearChargingProfileResponse();
+	    boolean accept = true;
+	    if (accept) {
+	    		response.setStatus(ClearChargingProfileStatus.ACCEPTED);
+	    } else {
+	    		response.setStatus(ClearChargingProfileStatus.UNKNOWN);
+	    }
+	    return response;
 	}
 
 	public DataTransferResponse dataTransfer(DataTransferRequest parameters) {
+		
 		logger.info("dataTransfer");
 		return new DataTransferResponse();
 	}
@@ -127,6 +141,15 @@ public class ChargePoint implements ChargePointService {
 		logger.info("updateFirmware");
 		UpdateFirmwareResponse rfr = new UpdateFirmwareResponse();
 		return rfr;
+	}
+	
+	
+	// Only temp function to show OCPP requests 
+	private boolean acceptOCCPRequest(HashMap<String, String> params) {
+		for (String key : params.keySet())  {
+			System.out.println("");
+		}
+		return true;
 	}
 
 }
