@@ -14,7 +14,6 @@ import ocpp.cp._2015._10.ChangeAvailabilityResponse;
 import ocpp.cp._2015._10.ChangeConfigurationRequest;
 import ocpp.cp._2015._10.ChangeConfigurationResponse;
 import ocpp.cp._2015._10.ChargePointService;
-import ocpp.cp._2015._10.ChargingProfilePurposeType;
 import ocpp.cp._2015._10.ClearCacheRequest;
 import ocpp.cp._2015._10.ClearCacheResponse;
 import ocpp.cp._2015._10.ClearCacheStatus;
@@ -58,19 +57,29 @@ public class ChargePoint implements ChargePointService {
 	
 	public CancelReservationResponse cancelReservation(CancelReservationRequest parameters) {
 		logger.info("Cancel Reservation");
-		int reservationId = parameters.getReservationId();
+	    HashMap<String, Object> params = new HashMap<>();
+	    params.put("Method", "cancelReservation");
+	    params.put("ReservationId", parameters.getReservationId());
 		CancelReservationResponse crr = new CancelReservationResponse();
-		CancelReservationStatus status = CancelReservationStatus.ACCEPTED;
-		crr.setStatus(status);
+	    if (acceptOCCPRequest(params)) {
+	    		crr.setStatus(CancelReservationStatus.ACCEPTED);
+	    } else {
+	    		crr.setStatus(CancelReservationStatus.REJECTED);
+	    }
 		return crr;
 	}
 
 	public ChangeAvailabilityResponse changeAvailability(ChangeAvailabilityRequest parameters) {
 		logger.info("changeAvailability");
-		int connectorId = parameters.getConnectorId();
+	    HashMap<String, Object> params = new HashMap<>();
+	    params.put("Method", "changeAvailability");
+	    params.put("connectorId", parameters.getConnectorId());
 		ChangeAvailabilityResponse car = new ChangeAvailabilityResponse();
-		AvailabilityStatus avs = AvailabilityStatus.ACCEPTED;
-		car.setStatus(avs);
+	    if (acceptOCCPRequest(params)) {
+	    		car.setStatus(AvailabilityStatus.ACCEPTED);
+	    } else {
+	    		car.setStatus(AvailabilityStatus.REJECTED);
+	    }
 		return car;
 	}
 
@@ -91,12 +100,13 @@ public class ChargePoint implements ChargePointService {
 
 	public ClearChargingProfileResponse clearChargingProfile(ClearChargingProfileRequest parameters) {
 		logger.info("clearChargingProfile");
-	    int id = parameters.getId();
-	    int connectorId = parameters.getConnectorId();
-	    ChargingProfilePurposeType purpose = parameters.getChargingProfilePurpose();
-	    int stackLevel = parameters.getStackLevel();
 	    ClearChargingProfileResponse response = new ClearChargingProfileResponse();
-	    boolean accept = true;
+	    HashMap<String, Object> params = new HashMap<>();
+	    params.put("Id", parameters.getId());
+	    params.put("ConnectorId", parameters.getConnectorId());
+	    params.put("StackLevel", parameters.getStackLevel());
+	    params.put("Purpose", parameters.getChargingProfilePurpose());
+	    boolean accept = acceptOCCPRequest(params);
 	    if (accept) {
 	    		response.setStatus(ClearChargingProfileStatus.ACCEPTED);
 	    } else {
@@ -189,9 +199,9 @@ public class ChargePoint implements ChargePointService {
 	
 	
 	// Only temp function to show OCPP requests 
-	private boolean acceptOCCPRequest(HashMap<String, String> params) {
+	private boolean acceptOCCPRequest(HashMap<String, Object> params) {
 		for (String key : params.keySet())  {
-			System.out.println("");
+			System.out.println(key+" "+params.get(key));
 		}
 		return true;
 	}
