@@ -4,9 +4,53 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javax.jws.WebService;
-import javax.xml.bind.annotation.XmlSchemaType;
 
-import ocpp.cp._2015._10.*;
+import ocpp.cp._2015._10.AvailabilityStatus;
+import ocpp.cp._2015._10.CancelReservationRequest;
+import ocpp.cp._2015._10.CancelReservationResponse;
+import ocpp.cp._2015._10.CancelReservationStatus;
+import ocpp.cp._2015._10.ChangeAvailabilityRequest;
+import ocpp.cp._2015._10.ChangeAvailabilityResponse;
+import ocpp.cp._2015._10.ChangeConfigurationRequest;
+import ocpp.cp._2015._10.ChangeConfigurationResponse;
+import ocpp.cp._2015._10.ChargePointService;
+import ocpp.cp._2015._10.ChargingProfilePurposeType;
+import ocpp.cp._2015._10.ClearCacheRequest;
+import ocpp.cp._2015._10.ClearCacheResponse;
+import ocpp.cp._2015._10.ClearCacheStatus;
+import ocpp.cp._2015._10.ClearChargingProfileRequest;
+import ocpp.cp._2015._10.ClearChargingProfileResponse;
+import ocpp.cp._2015._10.ClearChargingProfileStatus;
+import ocpp.cp._2015._10.DataTransferRequest;
+import ocpp.cp._2015._10.DataTransferResponse;
+import ocpp.cp._2015._10.GetCompositeScheduleRequest;
+import ocpp.cp._2015._10.GetCompositeScheduleResponse;
+import ocpp.cp._2015._10.GetConfigurationRequest;
+import ocpp.cp._2015._10.GetConfigurationResponse;
+import ocpp.cp._2015._10.GetDiagnosticsRequest;
+import ocpp.cp._2015._10.GetDiagnosticsResponse;
+import ocpp.cp._2015._10.GetLocalListVersionRequest;
+import ocpp.cp._2015._10.GetLocalListVersionResponse;
+import ocpp.cp._2015._10.RemoteStartStopStatus;
+import ocpp.cp._2015._10.RemoteStartTransactionRequest;
+import ocpp.cp._2015._10.RemoteStartTransactionResponse;
+import ocpp.cp._2015._10.RemoteStopTransactionRequest;
+import ocpp.cp._2015._10.RemoteStopTransactionResponse;
+import ocpp.cp._2015._10.ReserveNowRequest;
+import ocpp.cp._2015._10.ReserveNowResponse;
+import ocpp.cp._2015._10.ResetRequest;
+import ocpp.cp._2015._10.ResetResponse;
+import ocpp.cp._2015._10.SendLocalListRequest;
+import ocpp.cp._2015._10.SendLocalListResponse;
+import ocpp.cp._2015._10.SetChargingProfileRequest;
+import ocpp.cp._2015._10.SetChargingProfileResponse;
+import ocpp.cp._2015._10.TriggerMessageRequest;
+import ocpp.cp._2015._10.TriggerMessageResponse;
+import ocpp.cp._2015._10.UnlockConnectorRequest;
+import ocpp.cp._2015._10.UnlockConnectorResponse;
+import ocpp.cp._2015._10.UnlockStatus;
+import ocpp.cp._2015._10.UpdateFirmwareRequest;
+import ocpp.cp._2015._10.UpdateFirmwareResponse;
 
 @WebService(endpointInterface = "ocpp.cp._2015._10.ChargePointService")
 public class ChargePoint implements ChargePointService {
@@ -124,7 +168,7 @@ public class ChargePoint implements ChargePointService {
 		logger.info("setChargingProfile");
 		return new SetChargingProfileResponse();
 	}
-
+	 
 	public TriggerMessageResponse triggerMessage(TriggerMessageRequest parameters) {
 		logger.info("triggerMessage");
 		return new TriggerMessageResponse();

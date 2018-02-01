@@ -2,7 +2,6 @@ package com.faradice.ocpp.centralsystem;
 
 import javax.xml.ws.Endpoint;
 
-
 /*
  * create classes from wsdl from cmd line wsimport tool:
  *   wsimport -keep -extension  -s src wsdl/OCPP_CentralSystemService_1.6.wsdl
