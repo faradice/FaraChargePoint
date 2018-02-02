@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javax.jws.WebService;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+
+import com.faradice.faraUtil.Log;
 
 import ocpp.cp._2015._10.AvailabilityStatus;
 import ocpp.cp._2015._10.CancelReservationRequest;
@@ -14,6 +18,8 @@ import ocpp.cp._2015._10.ChangeAvailabilityResponse;
 import ocpp.cp._2015._10.ChangeConfigurationRequest;
 import ocpp.cp._2015._10.ChangeConfigurationResponse;
 import ocpp.cp._2015._10.ChargePointService;
+import ocpp.cp._2015._10.ChargingProfileStatus;
+import ocpp.cp._2015._10.ChargingSchedule;
 import ocpp.cp._2015._10.ClearCacheRequest;
 import ocpp.cp._2015._10.ClearCacheResponse;
 import ocpp.cp._2015._10.ClearCacheStatus;
@@ -23,6 +29,7 @@ import ocpp.cp._2015._10.ClearChargingProfileStatus;
 import ocpp.cp._2015._10.ConfigurationStatus;
 import ocpp.cp._2015._10.DataTransferRequest;
 import ocpp.cp._2015._10.DataTransferResponse;
+import ocpp.cp._2015._10.DataTransferStatus;
 import ocpp.cp._2015._10.GetCompositeScheduleRequest;
 import ocpp.cp._2015._10.GetCompositeScheduleResponse;
 import ocpp.cp._2015._10.GetConfigurationRequest;
@@ -36,179 +43,328 @@ import ocpp.cp._2015._10.RemoteStartTransactionRequest;
 import ocpp.cp._2015._10.RemoteStartTransactionResponse;
 import ocpp.cp._2015._10.RemoteStopTransactionRequest;
 import ocpp.cp._2015._10.RemoteStopTransactionResponse;
+import ocpp.cp._2015._10.ReservationStatus;
 import ocpp.cp._2015._10.ReserveNowRequest;
 import ocpp.cp._2015._10.ReserveNowResponse;
 import ocpp.cp._2015._10.ResetRequest;
 import ocpp.cp._2015._10.ResetResponse;
+import ocpp.cp._2015._10.ResetStatus;
 import ocpp.cp._2015._10.SendLocalListRequest;
 import ocpp.cp._2015._10.SendLocalListResponse;
 import ocpp.cp._2015._10.SetChargingProfileRequest;
 import ocpp.cp._2015._10.SetChargingProfileResponse;
 import ocpp.cp._2015._10.TriggerMessageRequest;
 import ocpp.cp._2015._10.TriggerMessageResponse;
+import ocpp.cp._2015._10.TriggerMessageStatus;
 import ocpp.cp._2015._10.UnlockConnectorRequest;
 import ocpp.cp._2015._10.UnlockConnectorResponse;
 import ocpp.cp._2015._10.UnlockStatus;
 import ocpp.cp._2015._10.UpdateFirmwareRequest;
 import ocpp.cp._2015._10.UpdateFirmwareResponse;
+import ocpp.cp._2015._10.UpdateStatus;
 
 @WebService(endpointInterface = "ocpp.cp._2015._10.ChargePointService")
 public class ChargePoint implements ChargePointService {
 	public static final Logger logger = Logger.getLogger(ChargePoint.class.getName());
-	
+
 	public CancelReservationResponse cancelReservation(CancelReservationRequest parameters) {
 		logger.info("Cancel Reservation");
-	    HashMap<String, Object> params = new HashMap<>();
-	    params.put("Method", "cancelReservation");
-	    params.put("ReservationId", parameters.getReservationId());
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "cancelReservation");
+		params.put("ReservationId", parameters.getReservationId());
 		CancelReservationResponse crr = new CancelReservationResponse();
-	    if (acceptOCCPRequest(params)) {
-	    		crr.setStatus(CancelReservationStatus.ACCEPTED);
-	    } else {
-	    		crr.setStatus(CancelReservationStatus.REJECTED);
-	    }
+		if (acceptOCCPRequest(params)) {
+			crr.setStatus(CancelReservationStatus.ACCEPTED);
+		} else {
+			crr.setStatus(CancelReservationStatus.REJECTED);
+		}
 		return crr;
 	}
 
 	public ChangeAvailabilityResponse changeAvailability(ChangeAvailabilityRequest parameters) {
 		logger.info("changeAvailability");
-	    HashMap<String, Object> params = new HashMap<>();
-	    params.put("Method", "changeAvailability");
-	    params.put("connectorId", parameters.getConnectorId());
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "changeAvailability");
+		params.put("connectorId", parameters.getConnectorId());
 		ChangeAvailabilityResponse car = new ChangeAvailabilityResponse();
-	    if (acceptOCCPRequest(params)) {
-	    		car.setStatus(AvailabilityStatus.ACCEPTED);
-	    } else {
-	    		car.setStatus(AvailabilityStatus.REJECTED);
-	    }
+		if (acceptOCCPRequest(params)) {
+			car.setStatus(AvailabilityStatus.ACCEPTED);
+		} else {
+			car.setStatus(AvailabilityStatus.REJECTED);
+		}
 		return car;
 	}
 
 	public ChangeConfigurationResponse changeConfiguration(ChangeConfigurationRequest parameters) {
 		logger.info("changeConfiguration");
-	    HashMap<String, Object> params = new HashMap<>();
-	    params.put("Method", "changeConfiguration");
-	    params.put(parameters.getKey(), parameters.getValue());
-	    ChangeConfigurationResponse ccr = new ChangeConfigurationResponse();
-	    if (acceptOCCPRequest(params)) {
-	    		ccr.setStatus(ConfigurationStatus.ACCEPTED);
-	    } else {
-	    		ccr.setStatus(ConfigurationStatus.REJECTED);
-	    }
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "changeConfiguration");
+		params.put(parameters.getKey(), parameters.getValue());
+		ChangeConfigurationResponse ccr = new ChangeConfigurationResponse();
+		if (acceptOCCPRequest(params)) {
+			ccr.setStatus(ConfigurationStatus.ACCEPTED);
+		} else {
+			ccr.setStatus(ConfigurationStatus.REJECTED);
+		}
 		return ccr;
 	}
 
 	public ClearCacheResponse clearCache(ClearCacheRequest parameters) {
 		logger.info("clearCache");
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "clearCache");
 		ClearCacheResponse ccr = new ClearCacheResponse();
-		ClearCacheStatus ccs = ClearCacheStatus.ACCEPTED;
-		ccr.setStatus(ccs);
+		if (acceptOCCPRequest(params)) {
+			ccr.setStatus(ClearCacheStatus.ACCEPTED);
+		} else {
+			ccr.setStatus(ClearCacheStatus.REJECTED);
+		}
 		return ccr;
 	}
 
 	public ClearChargingProfileResponse clearChargingProfile(ClearChargingProfileRequest parameters) {
 		logger.info("clearChargingProfile");
-	    ClearChargingProfileResponse response = new ClearChargingProfileResponse();
-	    HashMap<String, Object> params = new HashMap<>();
-	    params.put("Id", parameters.getId());
-	    params.put("ConnectorId", parameters.getConnectorId());
-	    params.put("StackLevel", parameters.getStackLevel());
-	    params.put("Purpose", parameters.getChargingProfilePurpose());
-	    boolean accept = acceptOCCPRequest(params);
-	    if (accept) {
-	    		response.setStatus(ClearChargingProfileStatus.ACCEPTED);
-	    } else {
-	    		response.setStatus(ClearChargingProfileStatus.UNKNOWN);
-	    }
-	    return response;
+		ClearChargingProfileResponse response = new ClearChargingProfileResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "clearChargingProfile");
+		params.put("Id", parameters.getId());
+		params.put("ConnectorId", parameters.getConnectorId());
+		params.put("StackLevel", parameters.getStackLevel());
+		params.put("Purpose", parameters.getChargingProfilePurpose());
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setStatus(ClearChargingProfileStatus.ACCEPTED);
+		} else {
+			response.setStatus(ClearChargingProfileStatus.UNKNOWN);
+		}
+		return response;
 	}
 
 	public DataTransferResponse dataTransfer(DataTransferRequest parameters) {
-		
 		logger.info("dataTransfer");
-		return new DataTransferResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "dataTransfer");
+		params.put("messageId", parameters.getMessageId());
+		params.put("vendorId", parameters.getVendorId());
+		params.put("data", parameters.getData());
+		DataTransferResponse response = new DataTransferResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setStatus(DataTransferStatus.ACCEPTED);
+		} else {
+			response.setStatus(DataTransferStatus.REJECTED);
+		}
+		return response;
 	}
 
 	public GetConfigurationResponse getConfiguration(GetConfigurationRequest parameters) {
 		logger.info("getConfiguration");
-		return new GetConfigurationResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("key", parameters.getKey());
+		GetConfigurationResponse response = new GetConfigurationResponse();
+		boolean accept = acceptOCCPRequest(params);
+		return response;
 	}
 
 	public GetDiagnosticsResponse getDiagnostics(GetDiagnosticsRequest parameters) {
 		logger.info("getDiagnostics");
-		return new GetDiagnosticsResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "getDiagnostics");
+		params.put("location", parameters.getLocation());
+		params.put("startTime", parameters.getStartTime());
+		params.put("stopTime", parameters.getStopTime());
+		params.put("retries", parameters.getRetries());
+		params.put("retryInterval", parameters.getRetryInterval());
+		GetDiagnosticsResponse response = new GetDiagnosticsResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setFileName("Diagnostic_Filename");
+		} else {
+			response.setFileName("Diagnostic_Filename");
+		}
+		return response;
 	}
 
 	public GetLocalListVersionResponse getLocalListVersion(GetLocalListVersionRequest parameters) {
-		logger.info("clearCache");
-		return new GetLocalListVersionResponse();
+		logger.info("getLocalListVersion");
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "getLocalListVersion");
+		GetLocalListVersionResponse response = new GetLocalListVersionResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setListVersion(2020);
+		} else {
+			response.setListVersion(-1);
+		}
+		return response;
 	}
 
 	public RemoteStartTransactionResponse remoteStartTransaction(RemoteStartTransactionRequest parameters) {
-		String tag = parameters.getIdTag();
-		logger.info("remoteStartTransaction for Tag:"+tag);
-		RemoteStartTransactionResponse rst = new RemoteStartTransactionResponse();
-		boolean accepted = tag.equals("1234");
-		if (accepted) {
-			rst.setStatus(RemoteStartStopStatus.ACCEPTED);
+		logger.info("remoteStartTransaction");
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "remoteStartTransaction");
+		params.put("connectorId", parameters.getConnectorId());
+		params.put("idTag", parameters.getIdTag());
+		params.put("chargingProfile", parameters.getChargingProfile());
+
+		RemoteStartTransactionResponse response = new RemoteStartTransactionResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setStatus(RemoteStartStopStatus.ACCEPTED);
 		} else {
-			rst.setStatus(RemoteStartStopStatus.REJECTED);
+			response.setStatus(RemoteStartStopStatus.REJECTED);
 		}
-		return rst;
+		return response;
 	}
 
 	public RemoteStopTransactionResponse remoteStopTransaction(RemoteStopTransactionRequest parameters) {
 		logger.info("remoteStopTransaction");
-		return new RemoteStopTransactionResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "remoteStopTransaction");
+		params.put("transactionId", parameters.getTransactionId());
+		RemoteStopTransactionResponse response = new RemoteStopTransactionResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setStatus(RemoteStartStopStatus.ACCEPTED);
+		} else {
+			response.setStatus(RemoteStartStopStatus.REJECTED);
+		}
+		return response;
 	}
 
 	public GetCompositeScheduleResponse getCompositeSchedule(GetCompositeScheduleRequest parameters) {
 		logger.info("getCompositeSchedule");
-		return new GetCompositeScheduleResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "getCompositeSchedule");
+		params.put("connectorId", parameters.getConnectorId());
+		params.put("duration", parameters.getDuration());
+		params.put("ChargingRateUnitType", parameters.getChargingRateUnit());
+		GetCompositeScheduleResponse response = new GetCompositeScheduleResponse();
+		boolean accept = acceptOCCPRequest(params);
+		try {
+			if (accept) {
+				response.setChargingSchedule(new ChargingSchedule());
+				;
+				response.setConnectorId(1);
+				response.setScheduleStart(DatatypeFactory.newInstance().newXMLGregorianCalendar());
+				response.setChargingSchedule(new ChargingSchedule());
+			} else {
+				response.setChargingSchedule(new ChargingSchedule());
+				;
+				response.setConnectorId(1);
+				response.setScheduleStart(DatatypeFactory.newInstance().newXMLGregorianCalendar());
+				response.setChargingSchedule(new ChargingSchedule());
+			}
+		} catch (DatatypeConfigurationException ex) {
+			Log.error(ex.getMessage(), ex);
+		}
+		return response;
 	}
 
 	public ReserveNowResponse reserveNow(ReserveNowRequest parameters) {
 		logger.info("reserveNow");
-		return new ReserveNowResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "reserveNow");
+		params.put("connectorId", parameters.getConnectorId());
+		params.put("expiryDate", parameters.getExpiryDate());
+		params.put("idTag", parameters.getIdTag());
+		params.put("parentIdTag", parameters.getParentIdTag());
+		params.put("reservationId", parameters.getReservationId());
+		ReserveNowResponse response = new ReserveNowResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setStatus(ReservationStatus.ACCEPTED);
+		} else {
+			response.setStatus(ReservationStatus.OCCUPIED);
+		}
+		return response;
 	}
 
 	public ResetResponse reset(ResetRequest parameters) {
 		logger.info("reset");
-		return new ResetResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "reset");
+		params.put("ResetType", parameters.getType());
+		ResetResponse response = new ResetResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setStatus(ResetStatus.ACCEPTED);
+		} else {
+			response.setStatus(ResetStatus.REJECTED);
+		}
+		return response;
 	}
 
 	public SendLocalListResponse sendLocalList(SendLocalListRequest parameters) {
 		logger.info("sendLocalList");
-		return new SendLocalListResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "sendLocalList");
+		SendLocalListResponse response = new SendLocalListResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setStatus(UpdateStatus.ACCEPTED);
+		} else {
+			response.setStatus(UpdateStatus.FAILED);
+		}
+		return response;
 	}
 
 	public SetChargingProfileResponse setChargingProfile(SetChargingProfileRequest parameters) {
 		logger.info("setChargingProfile");
-		return new SetChargingProfileResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "setChargingProfile");
+		params.put("connectorId", parameters.getConnectorId());
+		SetChargingProfileResponse response = new SetChargingProfileResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setStatus(ChargingProfileStatus.ACCEPTED);
+		} else {
+			response.setStatus(ChargingProfileStatus.REJECTED);
+		}
+		return response;
 	}
-	 
+
 	public TriggerMessageResponse triggerMessage(TriggerMessageRequest parameters) {
 		logger.info("triggerMessage");
-		return new TriggerMessageResponse();
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "triggerMessage");
+		TriggerMessageResponse response = new TriggerMessageResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setStatus(TriggerMessageStatus.ACCEPTED);
+		} else {
+			response.setStatus(TriggerMessageStatus.REJECTED);
+		}
+		return response;
 	}
 
 	public UnlockConnectorResponse unlockConnector(UnlockConnectorRequest parameters) {
 		logger.info("unlockConnector");
-		UnlockConnectorResponse ucr = new UnlockConnectorResponse();
-		ucr.setStatus(UnlockStatus.NOT_SUPPORTED);
-		return ucr;
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "unlockConnector");
+		UnlockConnectorResponse response = new UnlockConnectorResponse();
+		boolean accept = acceptOCCPRequest(params);
+		if (accept) {
+			response.setStatus(UnlockStatus.UNLOCKED);
+		} else {
+			response.setStatus(UnlockStatus.UNLOCK_FAILED);
+		}
+		return response;
 	}
 
 	public UpdateFirmwareResponse updateFirmware(UpdateFirmwareRequest parameters) {
 		logger.info("updateFirmware");
-		UpdateFirmwareResponse rfr = new UpdateFirmwareResponse();
-		return rfr;
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("Method", "updateFirmware");
+		UpdateFirmwareResponse response = new UpdateFirmwareResponse();
+		boolean accept = acceptOCCPRequest(params);
+		return response;
 	}
-		
-	// Only temp function to show OCPP requests 
+
+	// Only temp function to show OCPP requests
 	private boolean acceptOCCPRequest(HashMap<String, Object> params) {
-		for (String key : params.keySet())  {
-			System.out.println(key+" "+params.get(key));
+		for (String key : params.keySet()) {
+			System.out.println(key + " " + params.get(key));
 		}
 		return true;
 	}
