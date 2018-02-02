@@ -20,6 +20,7 @@ import ocpp.cp._2015._10.ClearCacheStatus;
 import ocpp.cp._2015._10.ClearChargingProfileRequest;
 import ocpp.cp._2015._10.ClearChargingProfileResponse;
 import ocpp.cp._2015._10.ClearChargingProfileStatus;
+import ocpp.cp._2015._10.ConfigurationStatus;
 import ocpp.cp._2015._10.DataTransferRequest;
 import ocpp.cp._2015._10.DataTransferResponse;
 import ocpp.cp._2015._10.GetCompositeScheduleRequest;
@@ -88,9 +89,13 @@ public class ChargePoint implements ChargePointService {
 	    HashMap<String, Object> params = new HashMap<>();
 	    params.put("Method", "changeConfiguration");
 	    params.put(parameters.getKey(), parameters.getValue());
-		String key = parameters.getKey();
-		String newValue = parameters.getValue();
-		return new ChangeConfigurationResponse();
+	    ChangeConfigurationResponse ccr = new ChangeConfigurationResponse();
+	    if (acceptOCCPRequest(params)) {
+	    		ccr.setStatus(ConfigurationStatus.ACCEPTED);
+	    } else {
+	    		ccr.setStatus(ConfigurationStatus.REJECTED);
+	    }
+		return ccr;
 	}
 
 	public ClearCacheResponse clearCache(ClearCacheRequest parameters) {
