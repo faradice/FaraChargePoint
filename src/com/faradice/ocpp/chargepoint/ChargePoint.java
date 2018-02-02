@@ -196,8 +196,7 @@ public class ChargePoint implements ChargePointService {
 		UpdateFirmwareResponse rfr = new UpdateFirmwareResponse();
 		return rfr;
 	}
-	
-	
+		
 	// Only temp function to show OCPP requests 
 	private boolean acceptOCCPRequest(HashMap<String, Object> params) {
 		for (String key : params.keySet())  {
