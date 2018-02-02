@@ -85,6 +85,9 @@ public class ChargePoint implements ChargePointService {
 
 	public ChangeConfigurationResponse changeConfiguration(ChangeConfigurationRequest parameters) {
 		logger.info("changeConfiguration");
+	    HashMap<String, Object> params = new HashMap<>();
+	    params.put("Method", "changeConfiguration");
+	    params.put(parameters.getKey(), parameters.getValue());
 		String key = parameters.getKey();
 		String newValue = parameters.getValue();
 		return new ChangeConfigurationResponse();
