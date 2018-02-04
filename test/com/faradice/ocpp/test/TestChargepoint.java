@@ -15,6 +15,7 @@ public class TestChargepoint {
 		String host = "localhost";
 		String port = "8069";
 		String serviceName = "FaraChargePoint";
+		
 		URL url = new URL("http://"+host+":"+port+"/"+serviceName+"/?wsdl");
 		QName qName = new QName("http://chargepoint.ocpp.faradice.com/","ChargePointService");
 		Service service = Service.create(url, qName);
@@ -27,8 +28,6 @@ public class TestChargepoint {
 
 		rst.setIdTag("4321");
 		rstr = cp.remoteStartTransaction(rst);
-		System.out.println(rstr.getStatus().value());
-
-		
+		System.out.println(rstr.getStatus().value());		
 	}
 }

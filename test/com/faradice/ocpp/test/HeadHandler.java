@@ -1,12 +1,10 @@
 package com.faradice.ocpp.test;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.xml.namespace.QName;
-import javax.xml.soap.SOAPConstants;
 import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPHeaderElement;
@@ -15,37 +13,62 @@ import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
+// see http://victor-ichim.blogspot.is/2011/07/three-ways-to-configure-jax-ws-handlers.html
+// https://stackoverflow.com/questions/24127632/how-do-i-specify-the-ws-addressing-version-with-a-jax-ws-client
 public class HeadHandler implements SOAPHandler<SOAPMessageContext> {
-
+	public final String endpoint;
+	public HeadHandler(String endpoint) {
+		this.endpoint = endpoint;
+	}
+	
 	public Set<QName> getHeaders() {
-		return Collections.emptySet();
+	    QName chargeBoxIdentytyHeader = new QName("urn://Ocpp/Cs/2012/06/","chargeBoxIdentity");
+        HashSet<QName> headers = new HashSet<QName>();
+        headers.add(chargeBoxIdentytyHeader);
+        System.out.println("got Headers:  " + headers);
+        return headers;
 	}
 
 	public boolean handleMessage(SOAPMessageContext messageContext) {
 		try {
-
-			System.out.println("Client : handleMessage()......");
 			Boolean isRequest = (Boolean) messageContext.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
-
-			if (isRequest) {
+		    SOAPMessage soapMsg = messageContext.getMessage();
+            SOAPEnvelope soapEnv = soapMsg.getSOAPPart().getEnvelope();
+            SOAPHeader soapHeader = soapEnv.getHeader();
+   			if (isRequest) {
 				System.out.println("\nOutbound message:");
-			    SOAPMessage soapMsg = messageContext.getMessage();
-	            SOAPEnvelope soapEnv = soapMsg.getSOAPPart().getEnvelope();
-	            SOAPHeader soapHeader = soapEnv.getHeader();
 
 	            //if no header, add one
 	            if (soapHeader == null){
 	            		soapHeader = soapEnv.addHeader();
 	            }
 	            
-	            QName qname = new QName("http://www.w3.org/2005/08/addressing/", "chargeBoxIdentity");
-	            SOAPHeaderElement soapHeaderElement = soapHeader.addHeaderElement(qname);
-	            soapHeaderElement.setActor(SOAPConstants.URI_SOAP_ACTOR_NEXT);
-	            soapHeaderElement.addTextNode("234");
+	            // wsa:Action
+	            SOAPHeaderElement ae = soapHeader.addHeaderElement(new QName("wsa","Action"));
+//	            ae.setMustUnderstand(true);
+	            String actionName = (String)messageContext.get("javax.xml.ws.soap.http.soapaction.uri");
+	            ae.addTextNode(actionName);
+	            
+	            // ns:chargeBoxIdentity
+	            ae = soapHeader.addHeaderElement(new QName("ns","chargeBoxIdentity"));
+//	            ae.setMustUnderstand(true);
+	            String chargeBoxId = "FaraTestCharger";
+	            ae.addTextNode(chargeBoxId);
 	
+	            //wsa:MessageID
+	            ae = soapHeader.addHeaderElement(new QName("wsa","MessageID"));
+//	            ae.setMustUnderstand(true);
+	            String uuid = "uuid:" + UUID.randomUUID().toString();
+	            ae.addTextNode(uuid);
+	            
+	            //wsa:To (endpoint)
+	            ae = soapHeader.addHeaderElement(new QName("wsa","To"));
+//	            ae.setMustUnderstand(true);
+	            ae.addTextNode(endpoint);
+
 	            soapMsg.saveChanges();
 	            soapMsg.writeTo(System.out);
-
+	            System.out.println("Done");
 			} else {
 				System.out.println("\nInbound message:");
 			}

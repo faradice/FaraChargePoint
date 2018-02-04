@@ -5,20 +5,9 @@ import java.net.URL;
 import java.util.List;
 
 import javax.xml.namespace.QName;
-import javax.xml.soap.MessageFactory;
-import javax.xml.soap.SOAPBody;
-import javax.xml.soap.SOAPConnectionFactory;
-import javax.xml.soap.SOAPConstants;
-import javax.xml.soap.SOAPElement;
-import javax.xml.soap.SOAPEnvelope;
-import javax.xml.soap.SOAPHeader;
-import javax.xml.soap.SOAPMessage;
-import javax.xml.soap.SOAPPart;
 import javax.xml.ws.BindingProvider;
-import javax.xml.ws.Dispatch;
 import javax.xml.ws.Service;
 import javax.xml.ws.handler.Handler;
-import javax.xml.ws.soap.SOAPBinding;
 
 import ocpp.cs._2015._10.AuthorizeRequest;
 import ocpp.cs._2015._10.AuthorizeResponse;
@@ -32,18 +21,23 @@ public class TestCentralSystem {
 	// **** https://jointxroad.github.io/examples.html
 
 	// <soap12:header message="tns:Header" part="ChargeBoxIdentity" use="literal"/>
-
-	static String uri = "http://104.236.81.197:8088/cs_ocpp16/CentralSystemService?wsdl";
+/*
+	static String endpoint = "http://104.236.81.197:8088/cs_ocpp16/CentralSystemService";
+	static String uri = endpoint+"?wsdl";
 	static String serviceURN = "urn://Ocpp/Cs/2015/10/";
 	static String sericeName = "CentralSystemService";
+*/
+	
+/*	
+	static String uri = "http://localhost:8080/Ocpp15WebAppDemo/CentralSystemService?wsdl";
+	static String serviceURN = "urn://Ocpp/Cs/2012/06/";
+	static String sericeName = "CentralSystemService";
+*/
 
-	// static String uri = "http://localhost:8080/Ocpp15WebAppDemo/CentralSystemService?wsdl";
-	// static String serviceURN = "urn://Ocpp/Cs/2012/06/";
-	// static String sericeName = "CentralSystemService";
-
-	// static String uri = "http://localhost:8079/FaraCentralSystem/?wsdl";
-	// static String serviceURN = "http://centralsystem.ocpp.faradice.com/";
-	// static String sericeName ="CentralSystemService";
+	static String endpoint = "http://localhost:8079/FaraCentralSystem";
+	static String uri = endpoint+"?wsdl";
+	static String serviceURN = "http://centralsystem.ocpp.faradice.com/";
+	static String sericeName ="CentralSystemService";
 
 	static URL url;
 	static CentralSystemService ss;
@@ -60,7 +54,7 @@ public class TestCentralSystem {
 
 	public static void initSoap() {
 		try {
-			HeadHandler handler = new HeadHandler();
+			HeadHandler handler = new HeadHandler(endpoint);
 			url = new URL(uri);
 			qName = new QName(serviceURN, sericeName);
 

@@ -21,6 +21,7 @@ import ocpp.cs._2015._10.HeartbeatResponse;
 import ocpp.cs._2015._10.IdTagInfo;
 import ocpp.cs._2015._10.MeterValuesRequest;
 import ocpp.cs._2015._10.MeterValuesResponse;
+import ocpp.cs._2015._10.RegistrationStatus;
 import ocpp.cs._2015._10.StartTransactionRequest;
 import ocpp.cs._2015._10.StartTransactionResponse;
 import ocpp.cs._2015._10.StatusNotificationRequest;
@@ -48,8 +49,10 @@ public class CentralSystem implements CentralSystemService {
 	}
 
 	public BootNotificationResponse bootNotification(BootNotificationRequest parameters) {
-		// TODO Auto-generated method stub
-		return null;
+		logger.info("BootNotification ");
+		BootNotificationResponse bns = new BootNotificationResponse();
+		bns.setStatus(RegistrationStatus.ACCEPTED);
+		return bns;
 	}
 
 	public DataTransferResponse dataTransfer(DataTransferRequest parameters) {
