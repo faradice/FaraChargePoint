@@ -1,10 +1,11 @@
 package com.faradice.ocpp.centralsystem;
 
-import javax.xml.soap.SOAPEnvelope;
-import javax.xml.soap.SOAPHeader;
-import javax.xml.soap.SOAPHeaderElement;
+import java.util.List;
+
 import javax.xml.ws.Endpoint;
-import javax.xml.ws.WebServiceContext;
+import javax.xml.ws.handler.Handler;
+
+import com.faradice.ocpp.test.HeadHandler;
 
 /*
  * create classes from wsdl from cmd line wsimport tool:
@@ -20,18 +21,11 @@ public class CentralSystemMockupServer {
 		String serviceName = "FaraCentralSystem";
 		// Address to access wsdl file in browser
 		System.out.println(host+":"+port+"/"+serviceName+"/?wsdl");
-		Endpoint.publish("http://"+host+":"+port+"/"+serviceName+"/", new CentralSystem());
-/*		
-		WebServiceContext context = 
-		
-		SOAPEnvelope envelope = context.getMessage().getSOAPPart().getEnvelope();
-		SOAPHeader header = envelope.getHeader();
-		
-		
-		SOAPHeaderElement confirmationHeader = header.addHeaderElement(confirmation);
-		confirmationHeader.setActor("http://gizmos.com/confirmations");
-		confirmationHeader.setMustUnderstand(true);
-*/
-
+		CentralSystem cs = new CentralSystem();
+	
+		Endpoint ep = Endpoint.publish("http://"+host+":"+port+"/"+serviceName+"/", cs);
+		List<Handler> handlerChain = ep.getBinding().getHandlerChain();
+		handlerChain.add(new HeadHandler());
+		ep.getBinding().setHandlerChain(handlerChain);			
 	}
 }
