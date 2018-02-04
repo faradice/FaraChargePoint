@@ -5,7 +5,7 @@ import javax.xml.ws.Endpoint;
 
 /*
  * create classes from wsdl from cmd line wsimport tool:
- *   wsimport -keep -extension  -s src wsdl/OCPP_ChargePointService_1.6.wsdl
+ *   wsimport -keep -extension  -Xendorsed -s src wsdl/OCPP_ChargePointService_1.6.wsdl
  */
 public class ChargePointServer {
 	public static void main(String[] args) {
