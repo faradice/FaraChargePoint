@@ -34,9 +34,9 @@ public class TestCentralSystem {
 	static String sericeName = "CentralSystemService";
 */
 
-	static String endpoint = "http://localhost:8079/FaraCentralSystem";
-	static String uri = endpoint+"?wsdl";
-	static String serviceURN = "http://centralsystem.ocpp.faradice.com/";
+	static String endpoint = "http://localhost:8085/Fara_occp/CentralSystemService/";
+	static String uri = endpoint;
+	static String serviceURN = "urn://Ocpp/Cs/2015/10/";
 	static String sericeName ="CentralSystemService";
 
 	static URL url;
@@ -60,10 +60,13 @@ public class TestCentralSystem {
 
 			service = Service.create(url, qName);
 			ss = service.getPort(CentralSystemService.class);
+/*			
 			BindingProvider bp = (BindingProvider) ss;
 			List<Handler> handlerChain = bp.getBinding().getHandlerChain();
 			handlerChain.add(handler);
-			bp.getBinding().setHandlerChain(handlerChain);			
+			bp.getBinding().setHandlerChain(handlerChain);	
+			
+*/					
 			System.out.println("Binding done");
 		} catch (Exception e) {
 			e.printStackTrace();
