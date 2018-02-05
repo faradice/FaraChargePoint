@@ -1,0 +1,5 @@
+  <soap:Body>
+    <ns:authorizeRequest>
+      <ns:idTag>%s</ns:idTag>
+    </ns:authorizeRequest>
+  </soap:Body>

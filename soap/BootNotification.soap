@@ -1,0 +1,20 @@
+<soap:Body>
+  <ns:bootNotificationRequest>
+    <ns:chargePointVendor>%s</ns:chargePointVendor>
+    <ns:chargePointModel>%s</ns:chargePointModel>
+    <!--Optional:-->
+    <ns:chargePointSerialNumber>%s</ns:chargePointSerialNumber>
+    <!--Optional:-->
+    <ns:chargeBoxSerialNumber>%s</ns:chargeBoxSerialNumber>
+    <!--Optional:-->
+    <ns:firmwareVersion>%s</ns:firmwareVersion>
+    <!--Optional:-->
+    <ns:iccid>%s</ns:iccid>
+    <!--Optional:-->
+    <ns:imsi>%s</ns:imsi>
+    <!--Optional:-->
+    <ns:meterType>%s</ns:meterType>
+    <!--Optional:-->
+    <ns:meterSerialNumber>%s</ns:meterSerialNumber>
+  </ns:bootNotificationRequest>
+</soap:Body>

@@ -1,0 +1,10 @@
+   <soap:Body>
+      <ns:startTransactionRequest>
+         <ns:connectorId>%s</ns:connectorId>
+         <ns:idTag>%s</ns:idTag>
+         <ns:timestamp>%s</ns:timestamp>
+         <ns:meterStart>%s</ns:meterStart>
+         <!--Optional:-->
+         <ns:reservationId>%s</ns:reservationId>
+      </ns:startTransactionRequest>
+   </soap:Body>

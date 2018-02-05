@@ -1,0 +1,18 @@
+<soap:Body>
+    <ns:stopTransactionRequest>
+       <ns:transactionId>%s</ns:transactionId>
+       <!--Optional:-->
+       <ns:idTag>%s</ns:idTag>
+       <ns:timestamp>%s</ns:timestamp>
+       <ns:meterStop>%s</ns:meterStop>
+       <!--Zero or more repetitions:-->
+       <ns:transactionData>
+          <!--Zero or more repetitions:-->
+          <ns:values>
+             <ns:timestamp>%s</ns:timestamp>
+             <!--1 or more repetitions:-->
+             <ns:value context="%s" format="%s" measurand="%s" location="%s" unit="%s">%s</ns:value>
+          </ns:values>
+       </ns:transactionData>
+    </ns:stopTransactionRequest>
+ </soap:Body>

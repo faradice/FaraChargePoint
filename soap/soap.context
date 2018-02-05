@@ -1,0 +1,20 @@
+#
+# The soap context contains parameteters that
+# informs FaraSoap about service configuration and
+# ChargePointID of the charger
+# Make sure each line contains [key] [value]
+# do NOT place anythinge else than space between key and value (NOT key = value)
+#
+
+# http url of the soap service host
+#host http://104.236.81.197
+host http://localhost
+
+# The port of the service
+port 8085
+
+# The soap endpoint name
+endpoint /FaraOcpp15/CentralSystemService
+
+# The unique id of the charger
+chargePointId Faradice1
