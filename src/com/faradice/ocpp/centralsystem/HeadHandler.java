@@ -1,4 +1,4 @@
-package com.faradice.ocpp.test;
+package com.faradice.ocpp.centralsystem;
 
 import java.util.HashSet;
 import java.util.Set;

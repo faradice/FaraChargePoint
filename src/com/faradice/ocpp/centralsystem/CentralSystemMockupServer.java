@@ -5,8 +5,6 @@ import java.util.List;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.handler.Handler;
 
-import com.faradice.ocpp.test.HeadHandler;
-
 /*
  * create classes from wsdl from cmd line wsimport tool:
  *   wsimport -keep -extension  -keep -Xendorsed -s src wsdl/OCPP_CentralSystemService_1.6.wsdl
