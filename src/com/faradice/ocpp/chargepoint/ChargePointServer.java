@@ -4,6 +4,11 @@ import javax.xml.ws.Endpoint;
 
 
 /*
+ * Skoða þennan betur.  Virðist góður
+ * https://www.javaworld.com/article/3215966/java-language/web-services-in-java-se-part-2-creating-soap-web-services.html
+
+ * 
+ * 
  * create classes from wsdl from cmd line wsimport tool:
  *   wsimport -keep -extension  -Xendorsed -s src wsdl/OCPP_ChargePointService_1.6.wsdl
  */

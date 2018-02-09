@@ -6,6 +6,9 @@ import javax.xml.ws.Endpoint;
 import javax.xml.ws.handler.Handler;
 
 /*
+ * Skoða þennan betur.  Virðist góður
+ * https://www.javaworld.com/article/3215966/java-language/web-services-in-java-se-part-2-creating-soap-web-services.html
+ * 
  * create classes from wsdl from cmd line wsimport tool:
  *   wsimport -keep -extension  -keep -Xendorsed -s src wsdl/OCPP_CentralSystemService_1.6.wsdl
  *   nb command line: 
