@@ -5,6 +5,8 @@ import java.util.List;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.handler.Handler;
 
+import common.OcppHeaderHandler;
+
 /*
  * Skoða þennan betur.  Virðist góður
  * https://www.javaworld.com/article/3215966/java-language/web-services-in-java-se-part-2-creating-soap-web-services.html
@@ -20,15 +22,14 @@ public class CentralSystemMockupServer {
 		String host = "localhost";
 		String port = "8079";
 		String serviceName = "FaraCentralSystem";
-		String endpoint = host+":"+port+"/"+serviceName;
+		String endpoint = host + ":" + port + "/" + serviceName;
 		// Address to access wsdl file in browser
-		System.out.println(host+":"+port+"/"+serviceName+"?wsdl");
-		CentralSystem cs = new CentralSystem();
-	
-		Endpoint ep = Endpoint.publish("http://"+host+":"+port+"/"+serviceName, cs);
+		System.out.println(host + ":" + port + "/" + serviceName + "?wsdl");
+
+		Endpoint ep = Endpoint.publish("http://" + host + ":" + port + "/" + serviceName, new CentralSystem());
 		List<Handler> handlerChain = ep.getBinding().getHandlerChain();
-		handlerChain.add(new HeadHandler(endpoint));
-		ep.getBinding().setHandlerChain(handlerChain);	
+		handlerChain.add(new OcppHeaderHandler("Faradice1"));
+		ep.getBinding().setHandlerChain(handlerChain);
 		System.out.println("Server ready");
 	}
 }

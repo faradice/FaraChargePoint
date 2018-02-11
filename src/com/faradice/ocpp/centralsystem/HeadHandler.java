@@ -13,6 +13,8 @@ import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
+
 // see http://victor-ichim.blogspot.is/2011/07/three-ways-to-configure-jax-ws-handlers.html
 // https://stackoverflow.com/questions/24127632/how-do-i-specify-the-ws-addressing-version-with-a-jax-ws-client
 public class HeadHandler implements SOAPHandler<SOAPMessageContext> {
@@ -67,8 +69,10 @@ public class HeadHandler implements SOAPHandler<SOAPMessageContext> {
 	            ae.addTextNode(endpoint);
 
 	            soapMsg.saveChanges();
-	            soapMsg.writeTo(System.out);
-	            System.out.println("Done");
+	            ByteOutputStream bs = new ByteOutputStream();
+	            soapMsg.writeTo(bs);
+	            String s = new String(bs.getBytes());
+	            System.out.println(s);
 			} else {
 				System.out.println("\nInbound message:");
 			}

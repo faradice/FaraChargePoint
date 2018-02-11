@@ -2,12 +2,16 @@ package com.faradice.ocpp.test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import javax.xml.namespace.QName;
+import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
+import javax.xml.ws.handler.Handler;
 
 import com.faradice.ocpp.centralsystem.HeadHandler;
 
+import common.OcppHeaderHandler;
 import ocpp.cs._2015._10.AuthorizeRequest;
 import ocpp.cs._2015._10.AuthorizeResponse;
 import ocpp.cs._2015._10.CentralSystemService;
@@ -33,10 +37,10 @@ public class TestCentralSystem {
 	static String sericeName = "CentralSystemService";
 */
 
-	static String endpoint = "http://localhost:8085/Fara_occp/CentralSystemService/";
-	static String uri = endpoint;
-	static String serviceURN = "urn://Ocpp/Cs/2015/10/";
-	static String sericeName ="CentralSystemService";
+	static String endpoint = "http://localhost:8079/FaraCentralSystem";
+	static String uri = endpoint+"?wsdl";
+	static String serviceURN = "http://centralsystem.ocpp.faradice.com/";
+	static String sericeName = "CentralSystemService";
 
 	static URL url;
 	static CentralSystemService ss;
@@ -53,19 +57,18 @@ public class TestCentralSystem {
 
 	public static void initSoap() {
 		try {
-			HeadHandler handler = new HeadHandler(endpoint);
+			OcppHeaderHandler handler = new OcppHeaderHandler("Faradice1");
 			url = new URL(uri);
 			qName = new QName(serviceURN, sericeName);
 
 			service = Service.create(url, qName);
 			ss = service.getPort(CentralSystemService.class);
-/*			
+			
 			BindingProvider bp = (BindingProvider) ss;
 			List<Handler> handlerChain = bp.getBinding().getHandlerChain();
 			handlerChain.add(handler);
 			bp.getBinding().setHandlerChain(handlerChain);	
-			
-*/					
+					
 			System.out.println("Binding done");
 		} catch (Exception e) {
 			e.printStackTrace();
