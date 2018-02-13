@@ -10,7 +10,7 @@ import ocpp.cp._2015._10.ChargePointService;
 import ocpp.cp._2015._10.RemoteStartTransactionRequest;
 import ocpp.cp._2015._10.RemoteStartTransactionResponse;
 
-public class TestChargepoint {
+public class FaraChargePointChargepointTest {
 	public static void main(String[] args) throws MalformedURLException {
 		String host = "localhost";
 		String port = "8069";

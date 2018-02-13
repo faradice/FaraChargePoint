@@ -47,7 +47,7 @@ public class HeadHandler implements SOAPHandler<SOAPMessageContext> {
 	            
 	            // wsa:Action
 	            SOAPHeaderElement ae = soapHeader.addHeaderElement(new QName("wsa","Action"));
-//	            ae.setMustUnderstand(true);
+	            ae.setMustUnderstand(true);
 	            String actionName = (String)messageContext.get("javax.xml.ws.soap.http.soapaction.uri");
 	            ae.addTextNode(actionName);
 	            
@@ -64,9 +64,9 @@ public class HeadHandler implements SOAPHandler<SOAPMessageContext> {
 	            ae.addTextNode(uuid);
 	            
 	            //wsa:To (endpoint)
-	            ae = soapHeader.addHeaderElement(new QName("wsa","To"));
+//	            ae = soapHeader.addHeaderElement(new QName("wsa","To"));
 //	            ae.setMustUnderstand(true);
-	            ae.addTextNode(endpoint);
+//	            ae.addTextNode(endpoint);
 
 	            soapMsg.saveChanges();
 	            ByteOutputStream bs = new ByteOutputStream();
