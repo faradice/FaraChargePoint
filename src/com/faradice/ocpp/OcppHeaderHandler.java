@@ -1,4 +1,4 @@
-package common;
+package com.faradice.ocpp;
 
 import java.util.Set;
 import java.util.UUID;

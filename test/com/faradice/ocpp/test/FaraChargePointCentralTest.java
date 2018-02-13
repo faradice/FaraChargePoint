@@ -9,7 +9,8 @@ import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
 import javax.xml.ws.handler.Handler;
 
-import common.OcppHeaderHandler;
+import com.faradice.ocpp.OcppHeaderHandler;
+
 import ocpp.cs._2015._10.AuthorizeRequest;
 import ocpp.cs._2015._10.AuthorizeResponse;
 import ocpp.cs._2015._10.CentralSystemService;

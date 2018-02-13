@@ -1,5 +1,5 @@
 
-package ocpp.cs._2015._10;
+package ocpp.cs._2012._06;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,20 +19,20 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "CentralSystemService", targetNamespace = "urn://Ocpp/Cs/2015/10/", wsdlLocation = "http://104.236.81.197:8088/cs_ocpp16/CentralSystemService?wsdl")
+@WebServiceClient(name = "CentralSystemService", targetNamespace = "urn://Ocpp/Cs/2012/06/", wsdlLocation = "http://104.236.81.197:8088/Ocpp15WebAppDemo/CentralSystemService?wsdl")
 public class CentralSystemService_Service
     extends Service
 {
 
     private final static URL CENTRALSYSTEMSERVICE_WSDL_LOCATION;
     private final static WebServiceException CENTRALSYSTEMSERVICE_EXCEPTION;
-    private final static QName CENTRALSYSTEMSERVICE_QNAME = new QName("urn://Ocpp/Cs/2015/10/", "CentralSystemService");
+    private final static QName CENTRALSYSTEMSERVICE_QNAME = new QName("urn://Ocpp/Cs/2012/06/", "CentralSystemService");
 
     static {
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://104.236.81.197:8088/cs_ocpp16/CentralSystemService?wsdl");
+            url = new URL("http://104.236.81.197:8088/Ocpp15WebAppDemo/CentralSystemService?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -71,7 +71,7 @@ public class CentralSystemService_Service
      */
     @WebEndpoint(name = "CentralSystemServiceSoap12")
     public CentralSystemService getCentralSystemServiceSoap12() {
-        return super.getPort(new QName("urn://Ocpp/Cs/2015/10/", "CentralSystemServiceSoap12"), CentralSystemService.class);
+        return super.getPort(new QName("urn://Ocpp/Cs/2012/06/", "CentralSystemServiceSoap12"), CentralSystemService.class);
     }
 
     /**
@@ -83,7 +83,7 @@ public class CentralSystemService_Service
      */
     @WebEndpoint(name = "CentralSystemServiceSoap12")
     public CentralSystemService getCentralSystemServiceSoap12(WebServiceFeature... features) {
-        return super.getPort(new QName("urn://Ocpp/Cs/2015/10/", "CentralSystemServiceSoap12"), CentralSystemService.class, features);
+        return super.getPort(new QName("urn://Ocpp/Cs/2012/06/", "CentralSystemServiceSoap12"), CentralSystemService.class, features);
     }
 
     private static URL __getWsdlLocation() {

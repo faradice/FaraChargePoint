@@ -5,7 +5,7 @@ import java.util.List;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.handler.Handler;
 
-import common.OcppHeaderHandler;
+import com.faradice.ocpp.OcppHeaderHandler;
 
 /*
  * Skoða þennan betur.  Virðist góður
