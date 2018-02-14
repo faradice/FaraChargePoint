@@ -3,6 +3,7 @@ package com.faradice.ocpp.centralsystem;
 import java.util.logging.Logger;
 
 import javax.jws.WebService;
+import javax.xml.ws.soap.Addressing;
 
 import ocpp.cs._2015._10.AuthorizationStatus;
 import ocpp.cs._2015._10.AuthorizeRequest;
@@ -30,6 +31,7 @@ import ocpp.cs._2015._10.StopTransactionRequest;
 import ocpp.cs._2015._10.StopTransactionResponse;
 
 @WebService(endpointInterface = "ocpp.cs._2015._10.CentralSystemService")
+@Addressing(required = true)
 public class CentralSystem implements CentralSystemService {
 	public static final Logger logger = Logger.getLogger(CentralSystem.class.getName());
 
