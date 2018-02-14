@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "CentralSystemService", targetNamespace = "urn://Ocpp/Cs/2012/06/")
+@WebService(name = "CentralSystemService", portName = "CentralSystemServiceSoap12", targetNamespace = "urn://Ocpp/Cs/2012/06/")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 @XmlSeeAlso({
     ObjectFactory.class

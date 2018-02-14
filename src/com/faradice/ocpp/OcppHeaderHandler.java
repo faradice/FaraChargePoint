@@ -1,5 +1,6 @@
 package com.faradice.ocpp;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -54,7 +55,7 @@ public class OcppHeaderHandler implements SOAPHandler<SOAPMessageContext> {
 
 	            // wsa:Action
 	            SOAPHeaderElement ae = header.addHeaderElement(new QName("wsa", "Action"));
-	            ae.setMustUnderstand(true);
+	            ae.setMustUnderstand(false);
 	            String actionName = (String)context.get("javax.xml.ws.soap.http.soapaction.uri");
 	            ae.addTextNode(actionName);
 	            
@@ -71,7 +72,7 @@ public class OcppHeaderHandler implements SOAPHandler<SOAPMessageContext> {
 				message.saveChanges();
 				message.writeTo(bs);
 				String s = new String(bs.getBytes());
-//				System.out.println(s);
+				System.out.println(s);
 			} else {
 				System.out.println("Inbound");
 				message.writeTo(bs);
@@ -94,11 +95,9 @@ public class OcppHeaderHandler implements SOAPHandler<SOAPMessageContext> {
 	}
 
 	public Set<QName> getHeaders() {
-		return null;
-		/*
-		 * QName chargeBoxIdentytyHeader = new QName("urn://Ocpp/Cs/2012/06/", "chargeBoxIdentity"); HashSet<QName> headers = new HashSet<QName>();
-		 * headers.add(chargeBoxIdentytyHeader); System.out.println("got Headers:  " + headers); return headers;
-		 */
+		Set<QName> qns = new HashSet<>();
+		qns.add(new QName("wsa", "Action"));
+		return qns;
 	}
 
 }

@@ -29,9 +29,6 @@ import ocpp.cs._2015._10.StatusNotificationResponse;
 import ocpp.cs._2015._10.StopTransactionRequest;
 import ocpp.cs._2015._10.StopTransactionResponse;
 
-// wsdl for the 1.5 version on digital ocean
-// http://104.236.81.197:8088/Ocpp15WebAppDemo/CentralSystemService?wsdl
-//
 @WebService(endpointInterface = "ocpp.cs._2015._10.CentralSystemService")
 public class CentralSystem implements CentralSystemService {
 	public static final Logger logger = Logger.getLogger(CentralSystem.class.getName());
