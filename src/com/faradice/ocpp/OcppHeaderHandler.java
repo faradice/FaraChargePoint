@@ -33,17 +33,17 @@ public class OcppHeaderHandler implements SOAPHandler<SOAPMessageContext> {
 		SOAPMessage message = context.getMessage();
 		try {
 			if (outboundProperty) {
+				message.writeTo(bs);
+				String s1 = new String(bs.getBytes());
+				System.out.println(s1);
+
+				
 				SOAPEnvelope envelope = message.getSOAPPart().getEnvelope();
 				String ns = envelope.getNamespaceURI("ns");
 				if (ns == null) {
 					envelope.addNamespaceDeclaration("ns", "urn://Ocpp/Cs/2015/10/");
 				}
 
-				String wsa = envelope.getNamespaceURI("wsa");
-				if (wsa == null) {
-					envelope.addNamespaceDeclaration("wsa", "urn://Ocpp/Cs/2015/10/");
-				}
-				
 				SOAPHeader header = envelope.getHeader(); // addHeader();
 				if (header == null) {
 					header = envelope.addHeader();
@@ -52,22 +52,6 @@ public class OcppHeaderHandler implements SOAPHandler<SOAPMessageContext> {
 				// ns:chargeBoxIdentity
 				SOAPElement chargeBoxIdentityElement = header.addChildElement("chargeBoxIdentity", "ns");
 				chargeBoxIdentityElement.addTextNode(chargePointID);
-
-	            // wsa:Action
-	            SOAPHeaderElement ae = header.addHeaderElement(new QName("wsa", "Action"));
-	            ae.setMustUnderstand(false);
-	            String actionName = (String)context.get("javax.xml.ws.soap.http.soapaction.uri");
-	            ae.addTextNode(actionName);
-	            
-	            //wsa:MessageID
-	            ae = header.addHeaderElement(new QName("wsa","MessageID"));
-	            String uuid = "uuid:" + UUID.randomUUID().toString();
-	            ae.addTextNode(uuid);
-	            
-	            //wsa:To (endpoint)
-	            //ae = header.addHeaderElement(new QName("wsa","To"));
-	            //String endpoint = (String)context.get(JAXWSProperties.ADDRESSING_TO);
-	            //ae.addTextNode(endpoint);
 
 				message.saveChanges();
 				message.writeTo(bs);
@@ -96,7 +80,7 @@ public class OcppHeaderHandler implements SOAPHandler<SOAPMessageContext> {
 
 	public Set<QName> getHeaders() {
 		Set<QName> qns = new HashSet<>();
-		qns.add(new QName("wsa", "Action"));
+		qns.add(new QName("urn://Ocpp/Cs/2012/06/","chargeBoxIdentity"));
 		return qns;
 	}
 
