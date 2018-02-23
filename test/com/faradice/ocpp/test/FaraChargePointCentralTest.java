@@ -1,10 +1,6 @@
 package com.faradice.ocpp.test;
 
 import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
 
 import com.faradice.ocpp.OcppFactory;
 
@@ -20,49 +16,8 @@ import ocpp.cs._2015._10.CentralSystemService;
 import ocpp.cs._2015._10.IdTagInfo;
 
 public class FaraChargePointCentralTest {
-
-	// https://docs.oracle.com/javaee/5/tutorial/doc/bnbis.html
-
-	// https://jointxroad.github.io/examples.html
-
-	// <soap12:header message="tns:Header" part="ChargeBoxIdentity" use="literal"/>
+	static CentralSystemService ss = null;
 	
-	
-	
-
-//  FaraChargePoint local server
-/*	
-	static String endpoint = "http://localhost:8079/FaraCentralSystem";
-	static String uri = endpoint+"?wsdl";
-	static String serviceURN = "http://centralsystem.ocpp.faradice.com/";
-	static String sericeName = "CentralSystemService";
-*/
-	
-/*
-//  OCPP 15 Faradice DO server
-//	http://104.236.81.197:8088/Ocpp15WebAppDemo/CentralSystemService?wsdl	
-	static String endpoint = "http://104.236.81.197:8088/Ocpp15WebAppDemo/CentralSystemService";
-	static String uri = endpoint+"?wsdl";
-	static String serviceURN = "urn://Ocpp/Cs/2012/06/";
-	static String sericeName = "CentralSystemService";
-	*/
-
-	
-/*
-/*	
-//  Direct local server
-	static String endpoint = "http://localhost:8085/Fara_occp/CentralSystemService";
-	static String uri = endpoint+"?wsdl";
-	static String serviceURN = "urn://Ocpp/Cs/2015/10/";
-	static String sericeName = "CentralSystemService";
-
-*/
-	
-	static URL url;
-	static CentralSystemService ss;
-	static QName qName;
-	static Service service;
-
 	public static void testAuthorizeRequest() {
 		AuthorizeRequest aur = new AuthorizeRequest();
 		aur.setIdTag("1234");
