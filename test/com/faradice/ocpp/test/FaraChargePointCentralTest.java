@@ -61,11 +61,9 @@ public class FaraChargePointCentralTest {
 	
 //  OCPP 16 Faradice DO server 
 	
-	static String endpoint = "http://104.236.81.197:8088/cs_ocpp16/CentralSystemService";
-	static String uri = endpoint+"?wsdl";
-	static String serviceURN = "urn://Ocpp/Cs/2015/10/";
-	static String sericeName = "CentralSystemService";
 
+
+	
 
 /*	
 //  Direct local server
