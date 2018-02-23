@@ -40,7 +40,8 @@ public class FaraChargePointCentralTest {
 	static String serviceURN = "http://centralsystem.ocpp.faradice.com/";
 	static String sericeName = "CentralSystemService";
 */
-/*
+	
+
 //  OCPP 15 Faradice DO server
 //	http://104.236.81.197:8088/Ocpp15WebAppDemo/CentralSystemService?wsdl	
 	static String endpoint = "http://104.236.81.197:8088/Ocpp15WebAppDemo/CentralSystemService";
@@ -48,18 +49,17 @@ public class FaraChargePointCentralTest {
 	static String serviceURN = "urn://Ocpp/Cs/2012/06/";
 	static String sericeName = "CentralSystemService";
 	
-*/
-	/*
+
+	
+/*
 //  OCPP 15 Faradice local netbeans server
 //	http://localhost:8080/Ocpp15WebAppDemo/CentralSystemService?wsdl	
 	static String endpoint = "http://localhost:8080/Ocpp15WebAppDemo/CentralSystemService";
 	static String uri = endpoint+"?wsdl";
 	static String serviceURN = "urn://Ocpp/Cs/2012/06/";
 	static String sericeName = "CentralSystemService";
-
-*/	
+*/
 	
-//  OCPP 16 Faradice DO server 
 	
 
 
