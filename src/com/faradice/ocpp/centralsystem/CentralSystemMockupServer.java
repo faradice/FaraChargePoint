@@ -5,7 +5,6 @@ import java.util.List;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.handler.Handler;
 
-import com.faradice.ocpp.Ocpp15HeaderHandler;
 import com.faradice.ocpp.Ocpp16HeaderHandler;
 
 /*
