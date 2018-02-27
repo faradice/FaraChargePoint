@@ -2,6 +2,7 @@ package com.faradice.ocpp.test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.namespace.QName;
@@ -62,7 +63,7 @@ public class FaraChargePointCentralTest {
 //  OCPP 16 Faradice DO server 
 	
 
-
+//Úps hent óvart
 	
 
 /*	
@@ -73,11 +74,20 @@ public class FaraChargePointCentralTest {
 	static String sericeName = "CentralSystemService";
 
 */
+
 	
+//  ON Test Server: oncore-test.on.is
+//	http://oncore-test.on.is/OcppServices/Ocpp16/Ocpp16Service.svc?wsdl
+
+	static String endpoint = "http://oncore-test.on.is/OcppServices/Ocpp16/Ocpp16Service.svc";	
+	static String uri = endpoint+"?wsdl";
+	static String serviceURN = "urn://Ocpp/Cs/2015/10/";
+	static String sericeName = "Ocpp16Service";
+	static String port = "CentralSystemServiceSoap12";
+	
+		
 	static URL url;
 	static CentralSystemService ss;
-	static QName qName;
-	static Service service;
 
 	public static void testAuthorizeRequest() {
 		AuthorizeRequest aur = new AuthorizeRequest();
@@ -98,11 +108,18 @@ public class FaraChargePointCentralTest {
 	
 	public static void initSoap() {
 		try {
+			QName serviceName = new QName(serviceURN, sericeName);
+			QName portName = new QName(serviceURN, port);
+
 			url = new URL(uri);
-			qName = new QName(serviceURN, sericeName);
-			service = Service.create(url, qName);
+			Service service = Service.create(url, serviceName);
 			AddressingFeature af = new AddressingFeature();
-			ss = service.getPort(CentralSystemService.class, af);
+			Iterator<QName> qn = service.getPorts();
+			System.out.println("Ports read from service:");
+			while (qn.hasNext()) {
+				System.out.println(qn.next());
+			}
+			ss = service.getPort(portName, CentralSystemService.class, af);
 			addHandler();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,7 +128,7 @@ public class FaraChargePointCentralTest {
 
 	public static void main(String[] args) throws MalformedURLException {
 		initSoap();
-		testAuthorizeRequest();
+//		testAuthorizeRequest();
 	}
 
 }
