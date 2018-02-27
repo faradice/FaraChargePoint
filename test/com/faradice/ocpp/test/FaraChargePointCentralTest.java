@@ -11,7 +11,7 @@ import javax.xml.ws.Service;
 import javax.xml.ws.handler.Handler;
 import javax.xml.ws.soap.AddressingFeature;
 
-import com.faradice.ocpp.OcppHeaderHandler;
+import com.faradice.ocpp.Ocpp16HeaderHandler;
 
 /* 1.5
 import ocpp.cs._2012._06.IdTagInfo;
@@ -100,7 +100,7 @@ public class FaraChargePointCentralTest {
 	}
 
 	public static void addHandler() {
-		OcppHeaderHandler handler = new OcppHeaderHandler("Faradice1");
+		Ocpp16HeaderHandler handler = new Ocpp16HeaderHandler("Faradice1");
 		BindingProvider bp = (BindingProvider) ss;
 		List<Handler> handlerChain = bp.getBinding().getHandlerChain();
 		handlerChain.add(handler);

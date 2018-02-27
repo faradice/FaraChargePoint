@@ -18,12 +18,12 @@ import javax.xml.ws.handler.soap.SOAPMessageContext;
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import com.sun.xml.internal.ws.developer.JAXWSProperties;
 
-public class OcppHeaderHandler implements SOAPHandler<SOAPMessageContext> {
-	final static Logger log = Logger.getLogger(OcppHeaderHandler.class.getName());
+public class Ocpp15HeaderHandler implements SOAPHandler<SOAPMessageContext> {
+	final static Logger log = Logger.getLogger(Ocpp15HeaderHandler.class.getName());
 
 	public final String chargePointID;
 
-	public OcppHeaderHandler(String cpi) {
+	public Ocpp15HeaderHandler(String cpi) {
 		this.chargePointID = cpi;
 	}
 

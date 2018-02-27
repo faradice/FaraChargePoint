@@ -5,7 +5,8 @@ import java.util.List;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.handler.Handler;
 
-import com.faradice.ocpp.OcppHeaderHandler;
+import com.faradice.ocpp.Ocpp15HeaderHandler;
+import com.faradice.ocpp.Ocpp16HeaderHandler;
 
 /*
  * Skoða þennan betur.  Virðist góður
@@ -28,7 +29,7 @@ public class CentralSystemMockupServer {
 
 		Endpoint ep = Endpoint.publish("http://" + host + ":" + port + "/" + serviceName, new CentralSystem());
 		List<Handler> handlerChain = ep.getBinding().getHandlerChain();
-		handlerChain.add(new OcppHeaderHandler("Faradice1"));
+		handlerChain.add(new Ocpp16HeaderHandler("Faradice1"));
 		ep.getBinding().setHandlerChain(handlerChain);
 		System.out.println("Server ready");
 	}
