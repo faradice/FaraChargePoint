@@ -13,12 +13,6 @@ import javax.xml.ws.soap.AddressingFeature;
 
 import com.faradice.ocpp.Ocpp16HeaderHandler;
 
-/* 1.5
-import ocpp.cs._2012._06.IdTagInfo;
-import ocpp.cs._2012._06.AuthorizeRequest;
-import ocpp.cs._2012._06.AuthorizeResponse;
-import ocpp.cs._2012._06.CentralSystemService;
-*/
 import ocpp.cs._2015._10.AuthorizeRequest;
 import ocpp.cs._2015._10.AuthorizeResponse;
 import ocpp.cs._2015._10.BootNotificationRequest;
