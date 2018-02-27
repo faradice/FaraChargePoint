@@ -1,17 +1,8 @@
 package com.faradice.ocpp.test;
 
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
 
-import javax.xml.namespace.QName;
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.Service;
-import javax.xml.ws.handler.Handler;
-import javax.xml.ws.soap.AddressingFeature;
-
-import com.faradice.ocpp.Ocpp16HeaderHandler;
+import com.faradice.ocpp.Ocpp16Factory;
 
 import ocpp.cs._2015._10.AuthorizeRequest;
 import ocpp.cs._2015._10.AuthorizeResponse;
@@ -92,37 +83,9 @@ public class FaraChargePointCentralTest {
 		IdTagInfo tagInfo = ars.getIdTagInfo();
 		System.out.println("Authentication from server: "+tagInfo.getStatus().value());
 	}
-
-	public static void addHandler() {
-		Ocpp16HeaderHandler handler = new Ocpp16HeaderHandler("Faradice1");
-		BindingProvider bp = (BindingProvider) ss;
-		List<Handler> handlerChain = bp.getBinding().getHandlerChain();
-		handlerChain.add(handler);
-		bp.getBinding().setHandlerChain(handlerChain);
-		System.out.println("Handler added: "+handler.getClass().getName());
-	}
-	
-	public static void initSoap() {
-		try {
-			QName serviceName = new QName(serviceURN, sericeName);
-			QName portName = new QName(serviceURN, port);
-
-			URL url = new URL(uri);
-			Service service = Service.create(url, serviceName);
-			AddressingFeature af = new AddressingFeature();
-			Iterator<QName> qn = service.getPorts();
-			System.out.println("Ports read from service:");
-			while (qn.hasNext()) {
-				System.out.println(qn.next());
-			}
-			ss = service.getPort(portName, CentralSystemService.class, af);
-			addHandler();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+		
 	public static void main(String[] args) throws MalformedURLException {
-		initSoap();
+		ss = Ocpp16Factory.centralService("Faradice1", endpoint, serviceURN, sericeName, port);
 	}
 
 }
