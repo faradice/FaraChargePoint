@@ -45,7 +45,7 @@ public class FaraChargePointCentralTest {
 	
 /*  
 // OCPP 16 Faradice DO server 
-// Úps hent óvart
+// Ãšps henti Ã³vart
 	
 */
 	
@@ -58,7 +58,6 @@ public class FaraChargePointCentralTest {
 
 */
 
-	
 //  ON Test Server: oncore-test.on.is
 //	http://oncore-test.on.is/OcppServices/Ocpp16/Ocpp16Service.svc?wsdl
 
@@ -85,7 +84,8 @@ public class FaraChargePointCentralTest {
 	}
 		
 	public static void main(String[] args) throws MalformedURLException {
-		ss = Ocpp16Factory.centralService("Faradice1", endpoint, serviceURN, sericeName, port);
+		ss = Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
+//		ss = Ocpp16Factory.centralService("Faradice1", endpoint, serviceURN, sericeName, port);
 	}
 
 }

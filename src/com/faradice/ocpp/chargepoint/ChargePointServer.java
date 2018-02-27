@@ -2,7 +2,6 @@ package com.faradice.ocpp.chargepoint;
 
 import javax.xml.ws.Endpoint;
 
-
 /*
  * 
  * create classes from wsdl from cmd line wsimport tool:
@@ -14,7 +13,7 @@ public class ChargePointServer {
 		String port = "8069";
 		String serviceName = "FaraChargePoint";
 		// Address to access wsdl file in browser
-		System.out.println(host+":"+port+"/"+serviceName+"/?wsdl");
-		Endpoint.publish("http://"+host+":"+port+"/"+serviceName+"/", new ChargePoint());
+		System.out.println(host+":"+port+"/"+serviceName+"?wsdl");
+		Endpoint.publish("http://"+host+":"+port+"/"+serviceName, new ChargePoint());
 	}
 }
