@@ -28,23 +28,16 @@ import ocpp.cs._2015._10.IdTagInfo;
 import ocpp.cs._2015._10.RegistrationStatus;
 
 public class FaraChargePointCentralTest {
+	static CentralSystemService ss = null;
 
-	// https://docs.oracle.com/javaee/5/tutorial/doc/bnbis.html
-
-	// https://jointxroad.github.io/examples.html
-
-	// <soap12:header message="tns:Header" part="ChargeBoxIdentity" use="literal"/>
-	
-	
-	
-
-//  FaraChargePoint local server
 /*	
+//  FaraChargePoint local server
 	static String endpoint = "http://localhost:8079/FaraCentralSystem";
 	static String uri = endpoint+"?wsdl";
 	static String serviceURN = "http://centralsystem.ocpp.faradice.com/";
 	static String sericeName = "CentralSystemService";
 */
+	
 /*
 //  OCPP 15 Faradice DO server
 //	http://104.236.81.197:8088/Ocpp15WebAppDemo/CentralSystemService?wsdl	
@@ -54,7 +47,8 @@ public class FaraChargePointCentralTest {
 	static String sericeName = "CentralSystemService";
 	
 */
-	/*
+
+/*
 //  OCPP 15 Faradice local netbeans server
 //	http://localhost:8080/Ocpp15WebAppDemo/CentralSystemService?wsdl	
 	static String endpoint = "http://localhost:8080/Ocpp15WebAppDemo/CentralSystemService";
@@ -64,12 +58,12 @@ public class FaraChargePointCentralTest {
 
 */	
 	
-//  OCPP 16 Faradice DO server 
+/*  
+// OCPP 16 Faradice DO server 
+// Úps hent óvart
 	
-
-//Úps hent óvart
+*/
 	
-
 /*	
 //  Direct local server
 	static String endpoint = "http://localhost:8085/Fara_occp/CentralSystemService";
@@ -88,10 +82,6 @@ public class FaraChargePointCentralTest {
 	static String serviceURN = "urn://Ocpp/Cs/2015/10/";
 	static String sericeName = "Ocpp16Service";
 	static String port = "CentralSystemServiceSoap12";
-	
-		
-	static URL url;
-	static CentralSystemService ss;
 
 	public static void testBootNotification() {
 		BootNotificationRequest bnreq = new BootNotificationRequest();
@@ -123,7 +113,7 @@ public class FaraChargePointCentralTest {
 			QName serviceName = new QName(serviceURN, sericeName);
 			QName portName = new QName(serviceURN, port);
 
-			url = new URL(uri);
+			URL url = new URL(uri);
 			Service service = Service.create(url, serviceName);
 			AddressingFeature af = new AddressingFeature();
 			Iterator<QName> qn = service.getPorts();
@@ -137,10 +127,8 @@ public class FaraChargePointCentralTest {
 			e.printStackTrace();
 		}
 	}
-
 	public static void main(String[] args) throws MalformedURLException {
 		initSoap();
-//		testAuthorizeRequest();
 	}
 
 }
