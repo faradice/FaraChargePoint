@@ -12,6 +12,7 @@ import javax.xml.ws.handler.Handler;
 import javax.xml.ws.soap.AddressingFeature;
 
 import com.faradice.ocpp.OcppHeaderHandler;
+
 /* 1.5
 import ocpp.cs._2012._06.IdTagInfo;
 import ocpp.cs._2012._06.AuthorizeRequest;
@@ -20,8 +21,11 @@ import ocpp.cs._2012._06.CentralSystemService;
 */
 import ocpp.cs._2015._10.AuthorizeRequest;
 import ocpp.cs._2015._10.AuthorizeResponse;
+import ocpp.cs._2015._10.BootNotificationRequest;
+import ocpp.cs._2015._10.BootNotificationResponse;
 import ocpp.cs._2015._10.CentralSystemService;
 import ocpp.cs._2015._10.IdTagInfo;
+import ocpp.cs._2015._10.RegistrationStatus;
 
 public class FaraChargePointCentralTest {
 
@@ -89,6 +93,14 @@ public class FaraChargePointCentralTest {
 	static URL url;
 	static CentralSystemService ss;
 
+	public static void testBootNotification() {
+		BootNotificationRequest bnreq = new BootNotificationRequest();
+		bnreq.setChargeBoxSerialNumber("FaraX1");
+		BootNotificationResponse bnrsp = ss.bootNotification(bnreq);
+		RegistrationStatus rs = bnrsp.getStatus();
+		System.out.println("BootNotification from server: "+rs.value());
+	}
+	
 	public static void testAuthorizeRequest() {
 		AuthorizeRequest aur = new AuthorizeRequest();
 		aur.setIdTag("1234");
