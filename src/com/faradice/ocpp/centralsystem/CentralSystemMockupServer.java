@@ -1,11 +1,6 @@
 package com.faradice.ocpp.centralsystem;
 
-import java.util.List;
-
 import javax.xml.ws.Endpoint;
-import javax.xml.ws.handler.Handler;
-
-import com.faradice.ocpp.Ocpp16HeaderHandler;
 
 /*
  * create classes from wsdl from cmd line wsimport tool:
@@ -22,9 +17,9 @@ public class CentralSystemMockupServer {
 		// Address to access wsdl file in browser
 		System.out.println(host + ":" + port + "/" + serviceName + "?wsdl");
 		Endpoint ep = Endpoint.publish("http://" + host + ":" + port + "/" + serviceName, new CentralSystem());
-		List<Handler> handlerChain = ep.getBinding().getHandlerChain();
-		handlerChain.add(new Ocpp16HeaderHandler("CentralServer"));
-		ep.getBinding().setHandlerChain(handlerChain);
+//		List<Handler> handlerChain = ep.getBinding().getHandlerChain();
+//		handlerChain.add(new Ocpp16HeaderHandler("CentralServer"));
+//		ep.getBinding().setHandlerChain(handlerChain);
 		System.out.println("Server ready");
 	}
 }

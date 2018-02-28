@@ -2,6 +2,7 @@ package com.faradice.ocpp.centralsystem;
 
 import java.util.logging.Logger;
 
+import javax.jws.HandlerChain;
 import javax.jws.WebService;
 import javax.xml.ws.soap.Addressing;
 
@@ -33,7 +34,8 @@ import ocpp.cs._2015._10.StopTransactionRequest;
 import ocpp.cs._2015._10.StopTransactionResponse;
 
 @WebService(endpointInterface = "ocpp.cs._2015._10.CentralSystemService")
-@Addressing(required = true)
+@HandlerChain(file="handler_chain.xml")
+@Addressing(required = false)
 public class CentralSystem implements CentralSystemService {
 	public static final Logger logger = Logger.getLogger(CentralSystem.class.getName());
 
@@ -53,6 +55,8 @@ public class CentralSystem implements CentralSystemService {
 	}
 
 	public BootNotificationResponse bootNotification(BootNotificationRequest parameters) {
+		System.out.println("Charger boot");
+		
 		logger.info("BootNotification ");
 		BootNotificationResponse bns = new BootNotificationResponse();
 		bns.setStatus(RegistrationStatus.ACCEPTED);
