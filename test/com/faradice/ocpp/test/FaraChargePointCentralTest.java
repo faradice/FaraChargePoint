@@ -32,14 +32,16 @@ public class FaraChargePointCentralTest {
 	
 	public static void testAuthorizeRequest(CentralSystemService ss) {
 		AuthorizeRequest aur = new AuthorizeRequest();
-		aur.setIdTag("1234");
+		aur.setIdTag("123456");
 		AuthorizeResponse ars = ss.authorize(aur);
 		IdTagInfo tagInfo = ars.getIdTagInfo();
 		System.out.println("Authentication from server: "+tagInfo.getStatus().value());
 	}
 		
 	public static void main(String[] args) throws MalformedURLException {
-		CentralSystemService ss = Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
-		testBootNotification(ss);
+		CentralSystemService ss = Ocpp16Factory.digoCentralService16("FaraX1"); 
+//		CentralSystemService ss = Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
+//		testBootNotification(ss);
+		testAuthorizeRequest(ss);
 	}
 }
