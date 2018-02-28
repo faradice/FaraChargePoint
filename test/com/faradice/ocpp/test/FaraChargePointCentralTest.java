@@ -15,58 +15,6 @@ import ocpp.cs._2015._10.RegistrationStatus;
 public class FaraChargePointCentralTest {
 	static CentralSystemService ss = null;
 
-/*	
-//  FaraChargePoint local server
-	static String endpoint = "http://localhost:8079/FaraCentralSystem";
-	static String uri = endpoint+"?wsdl";
-	static String serviceURN = "http://centralsystem.ocpp.faradice.com/";
-	static String sericeName = "CentralSystemService";
-*/
-	
-/*
-//  OCPP 15 Faradice DO server
-//	http://104.236.81.197:8088/Ocpp15WebAppDemo/CentralSystemService?wsdl	
-	static String endpoint = "http://104.236.81.197:8088/Ocpp15WebAppDemo/CentralSystemService";
-	static String uri = endpoint+"?wsdl";
-	static String serviceURN = "urn://Ocpp/Cs/2012/06/";
-	static String sericeName = "CentralSystemService";
-	
-*/
-
-/*
-//  OCPP 15 Faradice local netbeans server
-//	http://localhost:8080/Ocpp15WebAppDemo/CentralSystemService?wsdl	
-	static String endpoint = "http://localhost:8080/Ocpp15WebAppDemo/CentralSystemService";
-	static String uri = endpoint+"?wsdl";
-	static String serviceURN = "urn://Ocpp/Cs/2012/06/";
-	static String sericeName = "CentralSystemService";
-
-*/	
-	
-/*  
-// OCPP 16 Faradice DO server 
-// Úps henti óvart
-	
-*/
-	
-/*	
-//  Direct local server
-	static String endpoint = "http://localhost:8085/Fara_occp/CentralSystemService";
-	static String uri = endpoint+"?wsdl";
-	static String serviceURN = "urn://Ocpp/Cs/2015/10/";
-	static String sericeName = "CentralSystemService";
-
-*/
-
-//  ON Test Server: oncore-test.on.is
-//	http://oncore-test.on.is/OcppServices/Ocpp16/Ocpp16Service.svc?wsdl
-
-	static String endpoint = "http://oncore-test.on.is/OcppServices/Ocpp16/Ocpp16Service.svc";	
-	static String uri = endpoint+"?wsdl";
-	static String serviceURN = "urn://Ocpp/Cs/2015/10/";
-	static String sericeName = "Ocpp16Service";
-	static String port = "CentralSystemServiceSoap12";
-
 	public static void testBootNotification() {
 		BootNotificationRequest bnreq = new BootNotificationRequest();
 		bnreq.setChargeBoxSerialNumber("FaraX1");
@@ -85,7 +33,6 @@ public class FaraChargePointCentralTest {
 		
 	public static void main(String[] args) throws MalformedURLException {
 		ss = Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
-//		ss = Ocpp16Factory.centralService("Faradice1", endpoint, serviceURN, sericeName, port);
 	}
 
 }
