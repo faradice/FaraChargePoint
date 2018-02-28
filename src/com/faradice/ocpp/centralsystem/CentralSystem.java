@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.xml.ws.soap.Addressing;
 
+import com.faradice.faraUtil.FaraDates;
+
 import ocpp.cs._2015._10.AuthorizationStatus;
 import ocpp.cs._2015._10.AuthorizeRequest;
 import ocpp.cs._2015._10.AuthorizeResponse;
@@ -54,6 +56,8 @@ public class CentralSystem implements CentralSystemService {
 		logger.info("BootNotification ");
 		BootNotificationResponse bns = new BootNotificationResponse();
 		bns.setStatus(RegistrationStatus.ACCEPTED);
+		bns.setCurrentTime(FaraDates.getXMLDateTime());
+		bns.setInterval(1000);
 		return bns;
 	}
 

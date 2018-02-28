@@ -19,13 +19,11 @@ public class CentralSystemMockupServer {
 		String host = "localhost";
 		String port = "8079";
 		String serviceName = "FaraCentralSystem";
-		String endpoint = host + ":" + port + "/" + serviceName;
 		// Address to access wsdl file in browser
 		System.out.println(host + ":" + port + "/" + serviceName + "?wsdl");
-
 		Endpoint ep = Endpoint.publish("http://" + host + ":" + port + "/" + serviceName, new CentralSystem());
 		List<Handler> handlerChain = ep.getBinding().getHandlerChain();
-		handlerChain.add(new Ocpp16HeaderHandler("Faradice1"));
+		handlerChain.add(new Ocpp16HeaderHandler("CentralServer"));
 		ep.getBinding().setHandlerChain(handlerChain);
 		System.out.println("Server ready");
 	}

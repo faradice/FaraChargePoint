@@ -10,20 +10,27 @@ import ocpp.cs._2015._10.BootNotificationRequest;
 import ocpp.cs._2015._10.BootNotificationResponse;
 import ocpp.cs._2015._10.CentralSystemService;
 import ocpp.cs._2015._10.IdTagInfo;
-import ocpp.cs._2015._10.RegistrationStatus;
 
 public class FaraChargePointCentralTest {
-	static CentralSystemService ss = null;
 
-	public static void testBootNotification() {
+	public static void testBootNotification(CentralSystemService ss) {
 		BootNotificationRequest bnreq = new BootNotificationRequest();
-		bnreq.setChargeBoxSerialNumber("FaraX1");
+		bnreq.setChargeBoxSerialNumber("X1-2008-31");
+		bnreq.setChargePointVendor("Faradice");
+		bnreq.setChargePointModel("FDP X1 S7");
+		bnreq.setFirmwareVersion("3.7.7");
+		bnreq.setIccid("Iccid1");
+		bnreq.setImsi("Imsi1");
+		bnreq.setMeterType("EVSE 1000Hz");
+		bnreq.setMeterSerialNumber("Meter-EVSE-Serial");
 		BootNotificationResponse bnrsp = ss.bootNotification(bnreq);
-		RegistrationStatus rs = bnrsp.getStatus();
-		System.out.println("BootNotification from server: "+rs.value());
+		System.out.println("BootNotification");
+		System.out.println("Status: "+bnrsp.getStatus());
+		System.out.println("Interval: "+bnrsp.getInterval());
+		System.out.println("Time: "+bnrsp.getCurrentTime());
 	}
 	
-	public static void testAuthorizeRequest() {
+	public static void testAuthorizeRequest(CentralSystemService ss) {
 		AuthorizeRequest aur = new AuthorizeRequest();
 		aur.setIdTag("1234");
 		AuthorizeResponse ars = ss.authorize(aur);
@@ -32,7 +39,7 @@ public class FaraChargePointCentralTest {
 	}
 		
 	public static void main(String[] args) throws MalformedURLException {
-		ss = Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
+		CentralSystemService ss = Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
+		testBootNotification(ss);
 	}
-
 }
