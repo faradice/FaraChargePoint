@@ -9,6 +9,8 @@ import ocpp.cs._2015._10.AuthorizeResponse;
 import ocpp.cs._2015._10.BootNotificationRequest;
 import ocpp.cs._2015._10.BootNotificationResponse;
 import ocpp.cs._2015._10.CentralSystemService;
+import ocpp.cs._2015._10.DataTransferRequest;
+import ocpp.cs._2015._10.DataTransferResponse;
 import ocpp.cs._2015._10.IdTagInfo;
 
 public class FaraChargePointCentralTest {
@@ -37,11 +39,22 @@ public class FaraChargePointCentralTest {
 		IdTagInfo tagInfo = ars.getIdTagInfo();
 		System.out.println("Authentication from server: "+tagInfo.getStatus().value());
 	}
+	
+	public static void testDataTransfer(CentralSystemService ss) {
+		DataTransferRequest dt = new DataTransferRequest();
+	    dt.setVendorId("Faradice");
+	    dt.setMessageId("status");
+	    dt.setData("Charging");
+	    DataTransferResponse dr = ss.dataTransfer(dt);
+	    System.out.println("Data: "+dr.getData()+" status: "+dr.getStatus());
+	}
+
 		
 	public static void main(String[] args) throws MalformedURLException {
 		CentralSystemService ss = Ocpp16Factory.digoCentralService16("FaraX1"); 
 //		CentralSystemService ss = Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
 //		testBootNotification(ss);
-		testAuthorizeRequest(ss);
+//		testAuthorizeRequest(ss);
+		testDataTransfer(ss);
 	}
 }
