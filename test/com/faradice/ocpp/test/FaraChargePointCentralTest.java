@@ -11,6 +11,9 @@ import ocpp.cs._2015._10.BootNotificationResponse;
 import ocpp.cs._2015._10.CentralSystemService;
 import ocpp.cs._2015._10.DataTransferRequest;
 import ocpp.cs._2015._10.DataTransferResponse;
+import ocpp.cs._2015._10.DiagnosticsStatus;
+import ocpp.cs._2015._10.DiagnosticsStatusNotificationRequest;
+import ocpp.cs._2015._10.DiagnosticsStatusNotificationResponse;
 import ocpp.cs._2015._10.IdTagInfo;
 
 public class FaraChargePointCentralTest {
@@ -49,12 +52,21 @@ public class FaraChargePointCentralTest {
 	    System.out.println("Data: "+dr.getData()+" status: "+dr.getStatus());
 	}
 
+	public static void testDiagnosticsStatusNotification(CentralSystemService ss) {
+		DiagnosticsStatusNotificationRequest dsrq = new DiagnosticsStatusNotificationRequest();
+		dsrq.setStatus(DiagnosticsStatus.IDLE);
+		DiagnosticsStatusNotificationResponse dsrp = ss.diagnosticsStatusNotification(dsrq);
+		System.out.println("Diagnostic status sent "+dsrp);
+	}
+
 		
 	public static void main(String[] args) throws MalformedURLException {
-		CentralSystemService ss = Ocpp16Factory.digoCentralService16("FaraX1"); 
-//		CentralSystemService ss = Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
+		Ocpp16Factory.digoCentralService16("FaraX1"); 
+//		Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
+		CentralSystemService ss = Ocpp16Factory.get();
 //		testBootNotification(ss);
 //		testAuthorizeRequest(ss);
 		testDataTransfer(ss);
+		testDiagnosticsStatusNotification(ss);
 	}
 }
