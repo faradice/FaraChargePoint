@@ -64,9 +64,9 @@ public class FaraChargePointCentralTest {
 		Ocpp16Factory.digoCentralService16("FaraX1"); 
 //		Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
 		CentralSystemService ss = Ocpp16Factory.get();
-//		testBootNotification(ss);
-//		testAuthorizeRequest(ss);
-		testDataTransfer(ss);
+		testBootNotification(ss);
+		testAuthorizeRequest(ss);
+//		testDataTransfer(ss);
 		testDiagnosticsStatusNotification(ss);
 	}
 }
