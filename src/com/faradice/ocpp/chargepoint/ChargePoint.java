@@ -7,6 +7,7 @@ import javax.jws.WebService;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
+import com.faradice.commands.FaraWebApi;
 import com.faradice.faraUtil.Log;
 
 import ocpp.cp._2015._10.AvailabilityStatus;
@@ -49,6 +50,7 @@ import ocpp.cp._2015._10.ReserveNowResponse;
 import ocpp.cp._2015._10.ResetRequest;
 import ocpp.cp._2015._10.ResetResponse;
 import ocpp.cp._2015._10.ResetStatus;
+import ocpp.cp._2015._10.ResetType;
 import ocpp.cp._2015._10.SendLocalListRequest;
 import ocpp.cp._2015._10.SendLocalListResponse;
 import ocpp.cp._2015._10.SetChargingProfileRequest;
@@ -208,27 +210,18 @@ public class ChargePoint implements ChargePointService {
 		params.put("chargingProfile", parameters.getChargingProfile());
 
 		RemoteStartTransactionResponse response = new RemoteStartTransactionResponse();
-		boolean accept = acceptOCCPRequest(params);
-		if (accept) {
-			response.setStatus(RemoteStartStopStatus.ACCEPTED);
-		} else {
-			response.setStatus(RemoteStartStopStatus.REJECTED);
-		}
+		FaraWebApi.scan(parameters.getIdTag());
+
+		// Todo check status in event file or log file to see if charger accepted request
+		response.setStatus(RemoteStartStopStatus.ACCEPTED);
 		return response;
 	}
 
 	public RemoteStopTransactionResponse remoteStopTransaction(RemoteStopTransactionRequest parameters) {
 		logger.info("remoteStopTransaction");
-		HashMap<String, Object> params = new HashMap<>();
-		params.put("Method", "remoteStopTransaction");
-		params.put("transactionId", parameters.getTransactionId());
+		FaraWebApi.disableCharger();
 		RemoteStopTransactionResponse response = new RemoteStopTransactionResponse();
-		boolean accept = acceptOCCPRequest(params);
-		if (accept) {
-			response.setStatus(RemoteStartStopStatus.ACCEPTED);
-		} else {
-			response.setStatus(RemoteStartStopStatus.REJECTED);
-		}
+		response.setStatus(RemoteStartStopStatus.ACCEPTED);
 		return response;
 	}
 
@@ -281,16 +274,15 @@ public class ChargePoint implements ChargePointService {
 	}
 
 	public ResetResponse reset(ResetRequest parameters) {
-		logger.info("reset");
-		HashMap<String, Object> params = new HashMap<>();
-		params.put("Method", "reset");
-		params.put("ResetType", parameters.getType());
+		logger.info("reset requested.  Type: "+parameters.getType());
 		ResetResponse response = new ResetResponse();
-		boolean accept = acceptOCCPRequest(params);
-		if (accept) {
+		response.setStatus(ResetStatus.REJECTED);
+		if (parameters.getType().equals(ResetType.HARD)) {
+			FaraWebApi.restartCharger();
 			response.setStatus(ResetStatus.ACCEPTED);
-		} else {
-			response.setStatus(ResetStatus.REJECTED);
+		} else if (parameters.getType().equals(ResetType.HARD)) {
+			FaraWebApi.restartPilot();
+			response.setStatus(ResetStatus.ACCEPTED);
 		}
 		return response;
 	}
@@ -368,5 +360,5 @@ public class ChargePoint implements ChargePointService {
 		}
 		return true;
 	}
-
+	
 }

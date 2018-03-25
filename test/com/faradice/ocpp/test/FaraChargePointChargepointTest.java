@@ -25,9 +25,10 @@ public class FaraChargePointChargepointTest {
 		rst.setIdTag("1234");
 		RemoteStartTransactionResponse rstr = cp.remoteStartTransaction(rst);
 		System.out.println(rstr.getStatus().value());
-
+/*
 		rst.setIdTag("4321");
 		rstr = cp.remoteStartTransaction(rst);
 		System.out.println(rstr.getStatus().value());		
+*/
 	}
 }
