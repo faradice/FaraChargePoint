@@ -237,13 +237,11 @@ public class ChargePoint implements ChargePointService {
 		try {
 			if (accept) {
 				response.setChargingSchedule(new ChargingSchedule());
-				;
 				response.setConnectorId(1);
 				response.setScheduleStart(DatatypeFactory.newInstance().newXMLGregorianCalendar());
 				response.setChargingSchedule(new ChargingSchedule());
 			} else {
 				response.setChargingSchedule(new ChargingSchedule());
-				;
 				response.setConnectorId(1);
 				response.setScheduleStart(DatatypeFactory.newInstance().newXMLGregorianCalendar());
 				response.setChargingSchedule(new ChargingSchedule());
