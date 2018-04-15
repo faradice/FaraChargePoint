@@ -44,8 +44,8 @@ public class FaraChargePointChargepointTest {
 	
 	public static void main(String[] args) throws Exception {
 		initTest();
-		testStartTransaction();
-		Thread.sleep(60000);
+//		testStartTransaction();
+//		Thread.sleep(60000);
 		testStopTransaction();
 	}
 }
