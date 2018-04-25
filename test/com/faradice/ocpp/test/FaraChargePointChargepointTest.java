@@ -57,6 +57,7 @@ public class FaraChargePointChargepointTest {
 		initTest();
 //		testStartTransaction();
 //		Thread.sleep(60000);
-		testStopTransaction();
+//		testStopTransaction();
+		testResetTransaction();
 	}
 }
