@@ -73,7 +73,7 @@ import ocpp.cp._2015._10.UpdateStatus;
 @HandlerChain(file="handler_chain2.xml")
 @BindingType(value="http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/")
 //@Addressing(required = false,enabled=true)
-@Addressing(required = false,enabled=true)
+@Addressing(required = false,enabled=false)
 public class ChargePoint implements ChargePointService {
 	public static final Logger logger = Logger.getLogger(ChargePoint.class.getName());
 
