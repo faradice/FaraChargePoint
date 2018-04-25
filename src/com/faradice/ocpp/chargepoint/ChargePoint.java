@@ -3,9 +3,13 @@ package com.faradice.ocpp.chargepoint;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+import javax.jws.HandlerChain;
 import javax.jws.WebService;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
+import javax.xml.ws.Action;
+import javax.xml.ws.BindingType;
+import javax.xml.ws.soap.Addressing;
 
 import com.faradice.commands.FaraWebApi;
 import com.faradice.faraUtil.Log;
@@ -66,6 +70,10 @@ import ocpp.cp._2015._10.UpdateFirmwareResponse;
 import ocpp.cp._2015._10.UpdateStatus;
 
 @WebService(endpointInterface = "ocpp.cp._2015._10.ChargePointService")
+@HandlerChain(file="handler_chain2.xml")
+@BindingType(value="http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/")
+//@Addressing(required = false,enabled=true)
+@Addressing(required = false,enabled=true)
 public class ChargePoint implements ChargePointService {
 	public static final Logger logger = Logger.getLogger(ChargePoint.class.getName());
 
@@ -270,7 +278,7 @@ public class ChargePoint implements ChargePointService {
 		}
 		return response;
 	}
-
+    @Action( output="/ResetResponse")
 	public ResetResponse reset(ResetRequest parameters) {
 		logger.info("reset requested.  Type: "+parameters.getType());
 		ResetResponse response = new ResetResponse();

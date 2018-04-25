@@ -10,14 +10,19 @@ import ocpp.cp._2015._10.RemoteStartTransactionRequest;
 import ocpp.cp._2015._10.RemoteStartTransactionResponse;
 import ocpp.cp._2015._10.RemoteStopTransactionRequest;
 import ocpp.cp._2015._10.RemoteStopTransactionResponse;
+import ocpp.cp._2015._10.ResetRequest;
+import ocpp.cp._2015._10.ResetResponse;
+import ocpp.cp._2015._10.ResetType;
 
 public class FaraChargePointChargepointTest {
 
 	static ChargePointService cp = null;
 	
 	private static void initTest() throws Exception {
-		String host = "localhost";
-		String port = "8069";
+//		String host = "localhost";
+		String host = "10.15.113.88";
+//		String port = "8069";
+		String port = "8080";
 		String serviceName = "FaraChargePoint";	
 		URL url = new URL("http://"+host+":"+port+"/"+serviceName+"/?wsdl");
 		QName qName = new QName("http://chargepoint.ocpp.faradice.com/","ChargePointService");
@@ -41,6 +46,12 @@ public class FaraChargePointChargepointTest {
 		System.out.println("Transaction stopped: "+rstopt.getStatus().value());
 	}
 
+	public static void testResetTransaction() {
+		ResetRequest rsts = new ResetRequest();
+		rsts.setType(ResetType.HARD);
+		ResetResponse rset = cp.reset(rsts);
+		System.out.println("Reset response: "+rset.getStatus().value());
+	}
 	
 	public static void main(String[] args) throws Exception {
 		initTest();
