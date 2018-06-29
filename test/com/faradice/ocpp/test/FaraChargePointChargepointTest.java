@@ -16,8 +16,8 @@ public class FaraChargePointChargepointTest {
 	static ChargePointService cp = null;
 	
 	private static void initTest() throws Exception {
-		String host = "localhost";
-		String port = "8069";
+		String host = "192.168.1.33";
+		String port = "8080";
 		String serviceName = "FaraChargePoint";	
 		URL url = new URL("http://"+host+":"+port+"/"+serviceName+"/?wsdl");
 		QName qName = new QName("http://chargepoint.ocpp.faradice.com/","ChargePointService");
@@ -44,8 +44,8 @@ public class FaraChargePointChargepointTest {
 	
 	public static void main(String[] args) throws Exception {
 		initTest();
-//		testStartTransaction();
+		testStartTransaction();
 //		Thread.sleep(60000);
-		testStopTransaction();
+//		testStopTransaction();
 	}
 }

@@ -3,9 +3,11 @@ package com.faradice.ocpp.chargepoint;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+import javax.jws.HandlerChain;
 import javax.jws.WebService;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
+import javax.xml.ws.soap.Addressing;
 
 import com.faradice.commands.FaraWebApi;
 import com.faradice.faraUtil.Log;
@@ -65,6 +67,8 @@ import ocpp.cp._2015._10.UpdateFirmwareRequest;
 import ocpp.cp._2015._10.UpdateFirmwareResponse;
 import ocpp.cp._2015._10.UpdateStatus;
 
+@HandlerChain(file="handler_chain.xml")
+@Addressing(required = true)
 @WebService(endpointInterface = "ocpp.cp._2015._10.ChargePointService")
 public class ChargePoint implements ChargePointService {
 	public static final Logger logger = Logger.getLogger(ChargePoint.class.getName());
