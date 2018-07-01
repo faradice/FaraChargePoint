@@ -207,15 +207,8 @@ public class ChargePoint implements ChargePointService {
 
 	public RemoteStartTransactionResponse remoteStartTransaction(RemoteStartTransactionRequest parameters) {
 		logger.info("remoteStartTransaction");
-		HashMap<String, Object> params = new HashMap<>();
-		params.put("Method", "remoteStartTransaction");
-		params.put("connectorId", parameters.getConnectorId());
-		params.put("idTag", parameters.getIdTag());
-		params.put("chargingProfile", parameters.getChargingProfile());
-
 		RemoteStartTransactionResponse response = new RemoteStartTransactionResponse();
 		FaraWebApi.scan(parameters.getIdTag());
-
 		// Todo check status in event file or log file to see if charger accepted request
 		response.setStatus(RemoteStartStopStatus.ACCEPTED);
 		return response;
