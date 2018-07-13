@@ -10,13 +10,22 @@ import ocpp.cp._2015._10.RemoteStartTransactionRequest;
 import ocpp.cp._2015._10.RemoteStartTransactionResponse;
 import ocpp.cp._2015._10.RemoteStopTransactionRequest;
 import ocpp.cp._2015._10.RemoteStopTransactionResponse;
+import ocpp.cp._2015._10.ResetRequest;
+import ocpp.cp._2015._10.ResetResponse;
+import ocpp.cp._2015._10.ResetType;
 
 public class FaraChargePointChargepointTest {
 
 	static ChargePointService cp = null;
 	
 	private static void initTest() throws Exception {
+<<<<<<< HEAD
 		String host = "192.168.1.177";
+=======
+//		String host = "localhost";
+		String host = "10.15.113.88";
+//		String port = "8069";
+>>>>>>> branch 'master' of https://github.com/faradice/FaraChargePoint.git
 		String port = "8080";
 		String serviceName = "FaraChargePoint";	
 		URL url = new URL("http://"+host+":"+port+"/"+serviceName+"/?wsdl");
@@ -41,11 +50,18 @@ public class FaraChargePointChargepointTest {
 		System.out.println("Transaction stopped: "+rstopt.getStatus().value());
 	}
 
+	public static void testResetTransaction() {
+		ResetRequest rsts = new ResetRequest();
+		rsts.setType(ResetType.HARD);
+		ResetResponse rset = cp.reset(rsts);
+		System.out.println("Reset response: "+rset.getStatus().value());
+	}
 	
 	public static void main(String[] args) throws Exception {
 		initTest();
 		testStartTransaction();
 //		Thread.sleep(60000);
-		testStopTransaction();
+//		testStopTransaction();
+		testResetTransaction();
 	}
 }

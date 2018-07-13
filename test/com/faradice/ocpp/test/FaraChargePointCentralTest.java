@@ -37,7 +37,7 @@ public class FaraChargePointCentralTest {
 	
 	public static void testAuthorizeRequest(CentralSystemService ss) {
 		AuthorizeRequest aur = new AuthorizeRequest();
-		aur.setIdTag("123456");
+		aur.setIdTag("123");
 		AuthorizeResponse ars = ss.authorize(aur);
 		IdTagInfo tagInfo = ars.getIdTagInfo();
 		System.out.println("Authentication from server: "+tagInfo.getStatus().value());
