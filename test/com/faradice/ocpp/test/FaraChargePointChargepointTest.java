@@ -19,13 +19,8 @@ public class FaraChargePointChargepointTest {
 	static ChargePointService cp = null;
 	
 	private static void initTest() throws Exception {
-<<<<<<< HEAD
-		String host = "192.168.1.177";
-=======
-//		String host = "localhost";
+//		String host = "192.168.1.177";
 		String host = "10.15.113.88";
-//		String port = "8069";
->>>>>>> branch 'master' of https://github.com/faradice/FaraChargePoint.git
 		String port = "8080";
 		String serviceName = "FaraChargePoint";	
 		URL url = new URL("http://"+host+":"+port+"/"+serviceName+"/?wsdl");

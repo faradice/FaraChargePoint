@@ -70,8 +70,7 @@ import ocpp.cp._2015._10.UpdateFirmwareRequest;
 import ocpp.cp._2015._10.UpdateFirmwareResponse;
 import ocpp.cp._2015._10.UpdateStatus;
 
-@HandlerChain(file="handler_chain.xml")
-@Addressing(required = true)
+
 @WebService(endpointInterface = "ocpp.cp._2015._10.ChargePointService")
 @HandlerChain(file="handler_chain2.xml")
 @BindingType(value="http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/")
