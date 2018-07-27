@@ -8,7 +8,7 @@ import com.faradice.faranet.FaraHttp;
  * 
  * create classes from wsdl from cmd line wsimport tool:
  * wsimport -keep -extension  -Xendorsed -s src wsdl/OCPP_ChargePointService_1.6.wsdl
- */
+ */          
 public class ChargePointServer {
 	public static void main(String[] args) {
 		String ipAddress = FaraHttp.ipAddress();
