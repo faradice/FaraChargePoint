@@ -7,8 +7,6 @@ import javax.jws.HandlerChain;
 import javax.jws.WebService;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
-import javax.xml.ws.soap.Addressing;
-import javax.xml.ws.Action;
 import javax.xml.ws.BindingType;
 import javax.xml.ws.soap.Addressing;
 
