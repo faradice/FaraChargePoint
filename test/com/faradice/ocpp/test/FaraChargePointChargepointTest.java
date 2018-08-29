@@ -20,7 +20,8 @@ public class FaraChargePointChargepointTest {
 	
 	private static void initTest() throws Exception {
 //		String host = "192.168.1.177";
-		String host = "10.15.113.88";
+//		String host = "10.15.113.88";
+		String host = "192.168.167.70";
 		String port = "8080";
 		String serviceName = "FaraChargePoint";	
 		URL url = new URL("http://"+host+":"+port+"/"+serviceName+"/?wsdl");
