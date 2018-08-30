@@ -220,7 +220,7 @@ public class ChargePoint implements ChargePointService {
 
 	public RemoteStopTransactionResponse remoteStopTransaction(RemoteStopTransactionRequest parameters) {
 		logger.info("remoteStopTransaction");
-		FaraWebApi.disableCharger();
+		FaraWebApi.stopTransaction();;
 		RemoteStopTransactionResponse response = new RemoteStopTransactionResponse();
 		response.setStatus(RemoteStartStopStatus.ACCEPTED);
 		return response;
