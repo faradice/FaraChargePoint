@@ -10,8 +10,8 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.ws.BindingType;
 import javax.xml.ws.soap.Addressing;
 
-import com.faradice.commands.FaraWebApi;
 import com.faradice.faraUtil.Log;
+import com.faradice.faranet.FaraWebApi;
 
 import ocpp.cp._2015._10.AvailabilityStatus;
 import ocpp.cp._2015._10.CancelReservationRequest;
