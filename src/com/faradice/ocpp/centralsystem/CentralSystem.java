@@ -33,7 +33,10 @@ import ocpp.cs._2015._10.StatusNotificationResponse;
 import ocpp.cs._2015._10.StopTransactionRequest;
 import ocpp.cs._2015._10.StopTransactionResponse;
 
-@WebService(endpointInterface = "ocpp.cs._2015._10.CentralSystemService")
+@WebService(
+    endpointInterface = "ocpp.cs._2015._10.CentralSystemService",
+    targetNamespace = "urn://Ocpp/Cs/2015/10/"
+)
 @HandlerChain(file="handler_chain.xml")
 @Addressing(required = true)
 public class CentralSystem implements CentralSystemService {
