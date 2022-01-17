@@ -1,6 +1,17 @@
 package com.faradice.ocpp.centralsystem;
 
+import com.faradice.faranet.FaraHttp;
+
 import javax.xml.ws.Endpoint;
+
+/*
+This is the actual Central Server that chargers connect to.
+See CentralSystem with the implementation for each OCPP endpoint server method
+To test, run FaraChargePointChargepointTest after this server is started.
+FaraChargePointCentralTest will connect to this server and call bootNotification and authenticate
+
+ */
+
 
 /*
  * create classes from wsdl from cmd line wsimport tool:
@@ -11,7 +22,8 @@ import javax.xml.ws.Endpoint;
  */
 public class CentralSystemMockupServer {
 	public static void main(String[] args) {
-		String host = "localhost";
+		String host = FaraHttp.ipAddress();
+//		String host = "localhost";
 		String port = "8079";
 		String serviceName = "FaraCentralSystem";
 		// Address to access wsdl file in browser

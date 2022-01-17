@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
+import com.faradice.faranet.FaraHttp;
 import ocpp.cp._2015._10.ChargePointService;
 import ocpp.cp._2015._10.RemoteStartTransactionRequest;
 import ocpp.cp._2015._10.RemoteStartTransactionResponse;
@@ -20,8 +21,9 @@ public class FaraChargePointChargepointTest {
 	
 	private static void initTest() throws Exception {
 //		String host = "192.168.1.177";
-		String host = "10.15.113.88";
+//		String host = "10.15.113.88";
 //		String host = "192.168.167.70";
+		String host = FaraHttp.ipAddress();
 		String port = "8080";
 		String serviceName = "FaraChargePoint";	
 		URL url = new URL("http://"+host+":"+port+"/"+serviceName+"/?wsdl");
