@@ -8,6 +8,7 @@ import javax.xml.ws.soap.Addressing;
 
 import com.faradice.faraUtil.FaraDates;
 
+import com.faradice.faraUtil.FaraFiles;
 import ocpp.cs._2015._10.AuthorizationStatus;
 import ocpp.cs._2015._10.AuthorizeRequest;
 import ocpp.cs._2015._10.AuthorizeResponse;
@@ -46,6 +47,12 @@ public class CentralSystem implements CentralSystemService {
 		String tag = parameters.getIdTag();
 		logger.info("Authorize "+tag);
 		boolean accepted = tag.equals("1234");
+
+		accepted = true;
+
+		String time = FaraDates.getDateTime(System.currentTimeMillis());
+		FaraFiles.appendRowToCSVFile("ocpp_log.txt", time + " - Authorizing tag: " + tag);
+
 		AuthorizeResponse aur = new AuthorizeResponse();
 		IdTagInfo idTagInfo = new IdTagInfo();
 		if (accepted) {
@@ -61,6 +68,9 @@ public class CentralSystem implements CentralSystemService {
 		System.out.println("Charger boot");
 		
 		logger.info("BootNotification ");
+		String time = FaraDates.getDateTime(System.currentTimeMillis());
+		FaraFiles.appendRowToCSVFile("ocpp_log.txt", time + " - Boot Notification");
+
 		BootNotificationResponse bns = new BootNotificationResponse();
 		bns.setStatus(RegistrationStatus.ACCEPTED);
 		bns.setCurrentTime(FaraDates.getXMLDateTime());
@@ -84,6 +94,9 @@ public class CentralSystem implements CentralSystemService {
 	}
 
 	public HeartbeatResponse heartbeat(HeartbeatRequest parameters) {
+		String time = FaraDates.getDateTime(System.currentTimeMillis());
+		FaraFiles.appendRowToCSVFile("ocpp_log.txt", time + " -heartbeat");
+
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -94,6 +107,9 @@ public class CentralSystem implements CentralSystemService {
 	}
 
 	public StartTransactionResponse startTransaction(StartTransactionRequest parameters) {
+		String time = FaraDates.getDateTime(System.currentTimeMillis());
+		FaraFiles.appendRowToCSVFile("ocpp_log.txt", time + " - start transaction");
+
 		// TODO Auto-generated method stub
 		return null;
 	}

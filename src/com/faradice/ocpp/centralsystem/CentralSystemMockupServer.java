@@ -1,5 +1,7 @@
 package com.faradice.ocpp.centralsystem;
 
+import com.faradice.faraUtil.FaraDates;
+import com.faradice.faraUtil.FaraFiles;
 import com.faradice.faranet.FaraHttp;
 
 import javax.xml.ws.Endpoint;
@@ -23,8 +25,7 @@ FaraChargePointCentralTest will connect to this server and call bootNotification
 public class CentralSystemMockupServer {
 	public static void main(String[] args) {
 		String host = FaraHttp.ipAddress();
-//		String host = "localhost";
-		String port = "8079";
+		String port = "80";
 		String serviceName = "FaraCentralSystem";
 		// Address to access wsdl file in browser
 		System.out.println(host + ":" + port + "/" + serviceName + "?wsdl");
@@ -32,6 +33,9 @@ public class CentralSystemMockupServer {
 //		List<Handler> handlerChain = ep.getBinding().getHandlerChain();
 //		handlerChain.add(new Ocpp16HeaderHandler("CentralServer"));
 //		ep.getBinding().setHandlerChain(handlerChain);
+		String time = FaraDates.getDateTime(System.currentTimeMillis());
+		FaraFiles.appendRowToCSVFile("ocpp_log.txt", time + " -ocpp server started");
+
 		System.out.println("Server ready");
 	}
 }

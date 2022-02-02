@@ -62,7 +62,7 @@ public class FaraChargePointCentralTest {
 		
 	public static void main(String[] args) throws MalformedURLException {
 //		Ocpp16Factory.digoCentralService16("FaraX1"); 
-		Ocpp16Factory.loalChargePointCentralMockup("FaraX1"); 
+		Ocpp16Factory.MagnusChargePointCentralMockup("FaraX1"); 
 
 		CentralSystemService ss = Ocpp16Factory.get();
 		testBootNotification(ss);
